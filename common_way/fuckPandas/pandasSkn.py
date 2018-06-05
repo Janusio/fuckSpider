@@ -34,8 +34,17 @@ def testPandasSeries():
     ob=pd.Series([1,2,3,4],index=['s','t','y','u'])
     # print(ob.values)
     print(ob)
+def dataFrom():
+    data = {'state': ['Ohio', 'Ohio', 'Ohio', 'Nevada', 'Nevada', 'Nevada'],
+            'year': [2000, 2001, 2002, 2001, 2002, 2003],
+            'pop': [1.5, 1.7, 3.6, 2.4, 2.9, 3.2]}
+    frame = pd.DataFrame(data)
+    print(frame)
+def pandasFun():
+    obj = pd.Series([4.5, 7.2, -5.3, 3.6], index=['d', 'b', 'a', 'c'])
+    print(obj)
+    obj2=obj.reindex(['a', 'b', 'c', 'd', 'e'])
+    print(obj2)
 if __name__ == '__main__':
-    # getRandomN()
-    # testNumpr()
-    # testNumpyNdarray()
-    testPandasSeries()
+
+    pandasFun()
