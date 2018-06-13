@@ -1,2 +1,6 @@
 房天下：
 http://esf.cd.fang.com/NewSecond/SuggestionForFrontPage.aspx?jsoncallback=?&city=%E6%88%90%E9%83%BD
+城市列表：
+http://js.soufunimg.com/homepage/new/family/css/allcitys20180320.js?v=20180321
+所有城市列表：
+http://js.soufunimg.com/homepage/new/family/css/citys20171228.js?v=20170521

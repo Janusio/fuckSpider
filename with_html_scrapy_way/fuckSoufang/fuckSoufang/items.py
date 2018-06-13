@@ -12,3 +12,14 @@ class FucksoufangItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     pass
+
+
+class SoufangCityAllWithProvinceItem(scrapy.Item):
+    provinceName = scrapy.Field()
+    provinceId = scrapy.Field()
+
+
+class SoufangCityAllWithCityItem(scrapy.Item):
+    cityName = scrapy.Field()
+    cityUrl = scrapy.Field()
+    provinceId = scrapy.Field()
