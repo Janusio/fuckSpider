@@ -3,3 +3,5 @@ numpy=1.14.3
 scrapy-redis
 pandas
 pywin32
+pyquery
+lxml

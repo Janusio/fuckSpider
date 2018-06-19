@@ -23,3 +23,9 @@ class SoufangCityAllWithCityItem(scrapy.Item):
     cityName = scrapy.Field()
     cityUrl = scrapy.Field()
     provinceId = scrapy.Field()
+
+
+class SoufangCityAllWithAreaItem(scrapy.Item):
+    areaName = scrapy.Field()
+    areaUrl = scrapy.Field()
+    cityId = scrapy.Field()
