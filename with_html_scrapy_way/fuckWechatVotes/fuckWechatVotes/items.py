@@ -24,6 +24,7 @@ class WechatVoteArticle(scrapy.Item):
     publish_time = scrapy.Field()
     allText = scrapy.Field()
     to_public_name = scrapy.Field()
+    to_public_url = scrapy.Field()
     to_public_num = scrapy.Field()
     to_public_des = scrapy.Field()
 

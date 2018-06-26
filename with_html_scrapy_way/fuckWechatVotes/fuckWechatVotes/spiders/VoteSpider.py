@@ -31,24 +31,59 @@ class WechatVoteSpider(scrapy.Spider):
         for url in self.start_urls:
             yield self.make_requests_from_url(url)
 
-    def parse_get_all_num(self, response):
+    def parse(self, response):
         ss = response.xpath('//*[@id="pagebar_container"]/div/text()').extract()
         allTiticle = re.findall(r'[0-9]\d*', ss[0])
         allNum = ''
         for ii in allTiticle:
             allNum += ii
         allNumInt = int(allNum)
-        for yy in range(0, allNum / 10):
+        for yy in range(0, 100):
             url = self.article_query_url.format(keyword=self.keyword, page=yy)
             # yield Request(url=item0['cityUrl'],
             #               meta={'cityName': item0['cityPinyin']},
             #               callback=self.parse_per_bus_num_list)
-            yield Request(url=url, callback=self.parse, cookies=self.cookies, headers=self.headers)
+            yield Request(url=url, callback=self.parse_get_all_num(), cookies=self.cookies, headers=self.headers)
 
-        def parse(self, response):
-            allUrl=response.xpath('//div[@id="main"]/div[@class="news_box"]/ul[@class="news-list"]/li')
-            for iii in allUrl:
-                item=WechatVoteArticle()
-                item["url"]=iii.xpath('div[@class="txt-box"]/h3/a[0]/@href').extract()
-                item["url"]=iii.xpath('div[@class="txt-box"]/h3/a[0]/@href').extract()
+    def parse_get_all_num(self, response):
+        allUrl = response.xpath('//div[@id="main"]/div[@class="news_box"]/ul[@class="news-list"]/li')
+        for iii in allUrl:
+            item = WechatVoteArticle()
+            item["url"] = iii.xpath('div[@class="txt-box"]/h3/a[1]/@href').extract()
+            titleP = iii.xpath('div[@class="txt-box"]/h3/a[0]/em')
+            title = ""
+            for perTitle in titleP:
+                title += perTitle.xpath('text()')
+            item["title"] = title
+            abstractP = iii.xpath('div[@class="txt-box"]/p[@class="txt-info"]/em')
+            abstract = ""
+            for perAbstract in abstractP:
+                title += perAbstract.xpath('text()')
+            item["abstract"] = abstract
 
+            item["to_public_name"] = iii.xpath('div[@class="txt-box"]/div[@class="s-p"]/a/test()')
+            item["to_public_url"] = iii.xpath('div[@class="txt-box"]/div[@class="s-p"]/a/@href')
+            item["publish_time"] = iii.xpath('div[@class="txt-box"]/div[@class="s-p"]/span[@class="s2"]/test()')
+            yield Request(url=item["url"], callback=self.parse_get_all_num(), cookies=self.cookies,
+                          headers=self.headers)
+
+    def get_per_page_info_with_award(self, response):
+        item = WechatVoteArticle()
+        item["title"] = response.xpath('//*[@id="activity-name"]/text()')
+        item["publish_time"]=response.xpath('//*[@id="publish_time"]/text()')
+        item["to_public_num"]=response.xpath('//*[@id="js_profile_qrcode"]/div/p[1]/span/text()')
+        item["to_public_des"]=response.xpath('//*[@id="js_profile_qrcode"]/div/p[2]/span/text()')
+
+    # id = scrapy.Field()
+    # title = scrapy.Field()
+    # abstract = scrapy.Field()
+    # url = scrapy.Field()
+    #
+    #
+    # publish_time = scrapy.Field()
+    # allText = scrapy.Field()
+    # to_public_name = scrapy.Field()
+    # to_public_num = scrapy.Field()
+    # to_public_des = scrapy.Field()
+    #
+    # award_des = scrapy.Field()
