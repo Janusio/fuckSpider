@@ -34,7 +34,7 @@ class DBPipeline(object):
             # 插入数据
             if isinstance(item, WechatVoteArticle):
                 self.cursor.execute(
-                    """INSERT INTO voteforkey(title, abstract,allText,award_des,publish_time,to_public_des,to_public_name,to_public_num,url)
+                    """INSERT INTO voteforkeyhuahua(title, abstract,allText,award_des,publish_time,to_public_des,to_public_name,to_public_num,url)
                     VALUE (%s, %s,%s,%s,%s,%s, %s,%s,%s)""",
                     (item['title'],
                      item['abstract'],
