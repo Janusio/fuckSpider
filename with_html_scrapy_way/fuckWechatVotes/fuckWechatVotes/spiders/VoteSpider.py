@@ -38,7 +38,7 @@ class WechatVoteSpider(scrapy.Spider):
         for ii in allTiticle:
             allNum += ii
         allNumInt = int(allNum)
-        for yy in range(0, 2):
+        for yy in range(1, 100):
             url = self.article_query_url.format(keyword=self.keyword, page=yy)
             # yield Request(url=item0['cityUrl'],
             #               meta={'cityName': item0['cityPinyin']},
@@ -46,14 +46,16 @@ class WechatVoteSpider(scrapy.Spider):
             yield Request(url=url, callback=self.parse_get_all_num, cookies=self.cookies, headers=self.headers)
 
     def parse_get_all_num(self, response):
+        print(response.url)
         allUrl = response.xpath('//div[@id="main"]/div[@class="news-box"]/ul[@class="news-list"]/li')
+        print(len(allUrl))
         for iii in allUrl:
             item = WechatVoteArticle()
             item["url"] = iii.xpath('div[@class="txt-box"]/h3/a[1]/@href').extract()[0]
 
             txtAbstract = iii.xpath('div[@class="txt-box"]/p[@class="txt-info"]').extract()
             txtAbstractClear=re.sub(r'<.*?>',"",txtAbstract[0])
-            item["abstract"]=txtAbstractClear
+            item["abstract"]=re.sub(r'\n',"",txtAbstractClear)
             # item["to_public_name"] = iii.xpath('div[@class="txt-box"]/div[@class="s-p"]/a/test()')
             # item["to_public_url"] = iii.xpath('div[@class="txt-box"]/div[@class="s-p"]/a/@href')
             # item["publish_time"] = iii.xpath('div[@class="txt-box"]/div[@class="s-p"]/span[@class="s2"]/test()')
@@ -63,24 +65,32 @@ class WechatVoteSpider(scrapy.Spider):
     def get_per_page_info_with_award(self, response):
         item = WechatVoteArticle()
         item["url"]=response.url
-        item["title"] = response.xpath('//*[@id="activity-name"]/text()').extract()
-        item["publish_time"]=response.xpath('//*[@id="publish_time"]/text()').extract()
-        item["to_public_num"]=response.xpath('//*[@id="js_profile_qrcode"]/div/p[1]/span/text()').extract()
-        item["to_public_name"]=response.xpath('//*[@id="js_name"]/text()').extract()
-        item["to_public_des"]=response.xpath('//*[@id="js_profile_qrcode"]/div/p[2]/span/text()').extract()
-        item["abstract"]=response.meta['abstract']
-        yield item
+        if len(response.xpath('//*[@id="activity-name"]/text()').extract())==0:
+            item["title"]="This is a demo title!"
+        else:
+            item["title"] = re.sub(r"[\n \r]",'',response.xpath('//*[@id="activity-name"]/text()').extract()[0])
 
-    # id = scrapy.Field()
-    # title = scrapy.Field()
-    # abstract = scrapy.Field()
-    # url = scrapy.Field()
-    #
-    #
-    # publish_time = scrapy.Field()
-    # allText = scrapy.Field()
-    # to_public_name = scrapy.Field()
-    # to_public_num = scrapy.Field()
-    # to_public_des = scrapy.Field()
-    #
-    # award_des = scrapy.Field()
+        item["publish_time"]=response.xpath('//*[@id="publish_time"]/text()').extract()
+        if len(item["publish_time"])==0:
+            item["publish_time"]="This is a demo time! "
+
+        if len(response.xpath('//*[@id="js_profile_qrcode"]/div/p[1]/span/text()').extract())==0:
+            item["to_public_num"]="This is a demo num!"
+        else:
+            item["to_public_num"]=re.sub(r"[\n \r]",'',response.xpath('//*[@id="js_profile_qrcode"]/div/p[1]/span/text()').extract()[0])
+
+        if len(response.xpath('//*[@id="js_name"]/text()').extract()):
+            item["to_public_name"]="This is a demo name!"
+        else:
+            item["to_public_name"]=re.sub(r"[\n \r]",'',response.xpath('//*[@id="js_name"]/text()').extract()[0])
+        if len(response.xpath('//*[@id="js_profile_qrcode"]/div/p[2]/span/text()').extract())==0:
+            item["to_public_des"]="This is a demo des!"
+        else:
+            item["to_public_des"]=re.sub(r"[\n \r]",'',response.xpath('//*[@id="js_profile_qrcode"]/div/p[2]/span/text()').extract()[0])
+
+        item["abstract"]=response.meta['abstract']
+
+        item['award_des']="demo"
+
+        item['allText']="demo"
+        yield item

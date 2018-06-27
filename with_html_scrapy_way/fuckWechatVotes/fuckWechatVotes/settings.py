@@ -66,9 +66,10 @@ EXTENSIONS = {
 }
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-# ITEM_PIPELINES = {
-#    'fuckWechatVotes.pipelines.FuckwechatvotesPipeline': 300,
-# }
+ITEM_PIPELINES = {
+   # 'fuckWechatVotes.pipelines.FuckwechatvotesPipeline': 300,
+   'fuckWechatVotes.pipelines.DBPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
@@ -90,4 +91,8 @@ EXTENSIONS = {
 # HTTPCACHE_DIR = 'httpcache'
 # HTTPCACHE_IGNORE_HTTP_CODES = []
 # HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
-COOKIES = "SUV=00295556ABD6F0C75AF1C57CFD2A1338; IPLOC=CN5101; SUID=391158DA4F18910A000000005AF64DA0; ABTEST=0|1529808413|v1; weixinIndexVisited=1; ppinf=5|1529905109|1531114709|dHJ1c3Q6MToxfGNsaWVudGlkOjQ6MjAxN3x1bmlxbmFtZTo1OkphbnVzfGNydDoxMDoxNTI5OTA1MTA5fHJlZm5pY2s6NTpKYW51c3x1c2VyaWQ6NDQ6bzl0Mmx1R29FaU1aR0UwOWJ3UnZ2WXVXVGMzQUB3ZWl4aW4uc29odS5jb218; pprdig=wQAwZ7ViT0BGJO9R-G-zWc3e-O_Xyq5LmdD3Cli_hbE--v4nZmI3F6Jpzuot9y4HRU3RSy6ZU6bUZ0TplzQq90_YtMK2QD1xuV6tdkUAAY90_sQbGVJaNP2ffQuLzLveLzYAtBcTY91IoMBqwDOuzn6Iyre7Hm5PW1RGiHKi6so; sgid=23-35698767-AVswf9UwtN5m9rdvwSEUfGw; sct=7; JSESSIONID=aaaBikZ88NvE7he5PKmnw; PHPSESSID=6su4gg8pv6in46249c7qkftfs6; SUIR=70ED2F2B5D58310718B721405E87C24D; SNUID=BAE0C6BA10157E99678EA3A61128934B; ld=Mkllllllll2bGk7HlllllV7hRitlllll$dbZ$Zllllwlllllpklll5@@@@@@@@@@; ppmdig=15300260850000009c00ca289c2e005fa9f9916a95f4fa63"
+COOKIES = "SUV=00295556ABD6F0C75AF1C57CFD2A1338; IPLOC=CN5101; SUID=391158DA4F18910A000000005AF64DA0; ABTEST=0|1529808413|v1; weixinIndexVisited=1; ppinf=5|1529905109|1531114709|dHJ1c3Q6MToxfGNsaWVudGlkOjQ6MjAxN3x1bmlxbmFtZTo1OkphbnVzfGNydDoxMDoxNTI5OTA1MTA5fHJlZm5pY2s6NTpKYW51c3x1c2VyaWQ6NDQ6bzl0Mmx1R29FaU1aR0UwOWJ3UnZ2WXVXVGMzQUB3ZWl4aW4uc29odS5jb218; pprdig=wQAwZ7ViT0BGJO9R-G-zWc3e-O_Xyq5LmdD3Cli_hbE--v4nZmI3F6Jpzuot9y4HRU3RSy6ZU6bUZ0TplzQq90_YtMK2QD1xuV6tdkUAAY90_sQbGVJaNP2ffQuLzLveLzYAtBcTY91IoMBqwDOuzn6Iyre7Hm5PW1RGiHKi6so; sgid=23-35698767-AVswf9UwtN5m9rdvwSEUfGw; SUIR=70ED2F2B5D58310718B721405E87C24D; ld=Mkllllllll2bGk7HlllllV7hRitlllll$dbZ$Zllllwlllllpklll5@@@@@@@@@@; ppmdig=1530030472000000106429b7a793340c680d56f51832b384; sct=8; PHPSESSID=th5trsni0ve057ihlb6it8gt52; SNUID=ABF1D6AB00046E8F0085A4C10108471A; seccodeRight=success; successCount=1|Tue, 26 Jun 2018 16:34:28 GMT; JSESSIONID=aaaD2UlRH3-AP91sUR7qw"
+MYSQL_HOST = 'localhost'
+MYSQL_DBNAME = 'codingatwill'
+MYSQL_USER = 'root'
+MYSQL_PASSWD = '1314'
