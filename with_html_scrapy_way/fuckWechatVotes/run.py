@@ -2,4 +2,4 @@
 # Author: Neng Qi
 from scrapy import cmdline
 
-cmdline.execute('scrapy crawl wechatVoteSpider -a k=艺术投票'.split())
+cmdline.execute('scrapy crawl wechatVoteSpider -a k=书法投票'.split())
