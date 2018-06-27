@@ -1,8 +1,8 @@
 import scrapy
-from with_html_scrapy_way.fuckWechatVotes.fuckWechatVotes.items import WechatVoteArticle
+from fuckWechatVotes.items import WechatVoteArticle
 from six.moves.urllib_parse import quote_plus
 from scrapy.conf import settings
-from with_html_scrapy_way.fuckWechatVotes.fuckWechatVotes.utils.transcookie import transCookie
+from fuckWechatVotes.utils.transcookie import transCookie
 from scrapy.http import HtmlResponse, Request
 import requests
 import re

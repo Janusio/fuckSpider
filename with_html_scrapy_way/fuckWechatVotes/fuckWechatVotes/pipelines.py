@@ -8,8 +8,8 @@ import pymysql
 import json
 import codecs
 
-from with_html_scrapy_way.fuckWechatVotes.fuckWechatVotes import settings
-from with_html_scrapy_way.fuckWechatVotes.fuckWechatVotes.items import *
+from fuckWechatVotes import settings
+from fuckWechatVotes.items import *
 
 
 class FuckwechatvotesPipeline(object):
