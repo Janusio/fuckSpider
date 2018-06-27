@@ -38,7 +38,7 @@ class WechatVoteSpider(scrapy.Spider):
         for ii in allTiticle:
             allNum += ii
         allNumInt = int(allNum)
-        for yy in range(10, 100):
+        for yy in range(1, 100):
             url = self.article_query_url.format(keyword=self.keyword, page=yy)
             # yield Request(url=item0['cityUrl'],
             #               meta={'cityName': item0['cityPinyin']},
