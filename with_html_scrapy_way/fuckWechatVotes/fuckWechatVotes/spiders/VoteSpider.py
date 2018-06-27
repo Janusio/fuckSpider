@@ -38,7 +38,7 @@ class WechatVoteSpider(scrapy.Spider):
         for ii in allTiticle:
             allNum += ii
         allNumInt = int(allNum)
-        for yy in range(1, 100):
+        for yy in range(10, 100):
             url = self.article_query_url.format(keyword=self.keyword, page=yy)
             # yield Request(url=item0['cityUrl'],
             #               meta={'cityName': item0['cityPinyin']},
@@ -79,10 +79,11 @@ class WechatVoteSpider(scrapy.Spider):
         else:
             item["to_public_num"]=re.sub(r"[\n \r]",'',response.xpath('//*[@id="js_profile_qrcode"]/div/p[1]/span/text()').extract()[0])
 
-        if len(response.xpath('//*[@id="js_name"]/text()').extract()):
+        if len(response.xpath('//*[@id="js_name"]/text()').extract())==0:
             item["to_public_name"]="This is a demo name!"
         else:
             item["to_public_name"]=re.sub(r"[\n \r]",'',response.xpath('//*[@id="js_name"]/text()').extract()[0])
+
         if len(response.xpath('//*[@id="js_profile_qrcode"]/div/p[2]/span/text()').extract())==0:
             item["to_public_des"]="This is a demo des!"
         else:
@@ -90,7 +91,7 @@ class WechatVoteSpider(scrapy.Spider):
 
         item["abstract"]=response.meta['abstract']
 
-        item['award_des']="demo"
+        item['award_des']="This is a demo award_des!"
 
-        item['allText']="demo"
+        item['allText']="This is a demo allText!"
         yield item
