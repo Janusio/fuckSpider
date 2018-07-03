@@ -12,3 +12,8 @@ class FuckqbaobeiItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     pass
+class GushiDetailItem(scrapy.Item):
+    title=scrapy.Field()
+    gushi_detail=scrapy.Field()
+    gushi_comment=scrapy.Field()
+

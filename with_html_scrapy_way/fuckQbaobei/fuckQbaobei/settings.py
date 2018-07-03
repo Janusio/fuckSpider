@@ -49,7 +49,9 @@ ROBOTSTXT_OBEY = True
 #SPIDER_MIDDLEWARES = {
 #    'fuckQbaobei.middlewares.FuckqbaobeiSpiderMiddleware': 543,
 #}
-
+EXTENSIONS = {
+   'scrapy.extensions.memusage.MemoryUsage': None,
+}
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
