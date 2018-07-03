@@ -22,14 +22,14 @@ ROBOTSTXT_OBEY = False  # 不遵守Robot协议
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 # CONCURRENT_REQUESTS = 32
-
+# 　　custom_settings = { 'DOWNLOAD_DELAY': 0.2, 'CONCURRENT_REQUESTS_PER_IP': 4, 'DOWNLOADER_MIDDLEWARES': {}, }
 # Configure a delay for requests for the same website (default: 0)
 # See http://scrapy.readthedocs.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-# DOWNLOAD_DELAY = 3
+DOWNLOAD_DELAY = 8
 # The download delay setting will honor only one of:
 # CONCURRENT_REQUESTS_PER_DOMAIN = 16
-# CONCURRENT_REQUESTS_PER_IP = 16
+CONCURRENT_REQUESTS_PER_IP = 16
 
 # Disable cookies (enabled by default)
 # COOKIES_ENABLED = False
@@ -66,9 +66,10 @@ EXTENSIONS = {
 }
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-# ITEM_PIPELINES = {
-#    'fuckWechatVotes.pipelines.FuckwechatvotesPipeline': 300,
-# }
+ITEM_PIPELINES = {
+   # 'fuckWechatVotes.pipelines.FuckwechatvotesPipeline': 300,
+   'fuckWechatVotes.pipelines.DBPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
@@ -90,4 +91,8 @@ EXTENSIONS = {
 # HTTPCACHE_DIR = 'httpcache'
 # HTTPCACHE_IGNORE_HTTP_CODES = []
 # HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
-COOKIES = "SUV=00295556ABD6F0C75AF1C57CFD2A1338; IPLOC=CN5101; SUID=391158DA4F18910A000000005AF64DA0; SNUID=70ED2F2B5D58310718B721405E87C24D; ABTEST=0|1529808413|v1; weixinIndexVisited=1; JSESSIONID=aaaJRyBGqjvsU_z9TUlnw; sct=5; ppinf=5|1529905109|1531114709|dHJ1c3Q6MToxfGNsaWVudGlkOjQ6MjAxN3x1bmlxbmFtZTo1OkphbnVzfGNydDoxMDoxNTI5OTA1MTA5fHJlZm5pY2s6NTpKYW51c3x1c2VyaWQ6NDQ6bzl0Mmx1R29FaU1aR0UwOWJ3UnZ2WXVXVGMzQUB3ZWl4aW4uc29odS5jb218; pprdig=wQAwZ7ViT0BGJO9R-G-zWc3e-O_Xyq5LmdD3Cli_hbE--v4nZmI3F6Jpzuot9y4HRU3RSy6ZU6bUZ0TplzQq90_YtMK2QD1xuV6tdkUAAY90_sQbGVJaNP2ffQuLzLveLzYAtBcTY91IoMBqwDOuzn6Iyre7Hm5PW1RGiHKi6so; sgid=23-35698767-AVswf9UwtN5m9rdvwSEUfGw; ppmdig=15299051100000008e19c04fcc3fdf9024571c2f93ba1834"
+COOKIES = "ABTEST=0|1530073841|v1; IPLOC=CN5101; SUID=B8B072764A42910A000000005B3312F1; SUID=B8B072763320910A000000005B3312F1; weixinIndexVisited=1; SUV=001F253D7672B0B85B3312F6CA259194; ppinf=5|1530073860|1531283460|dHJ1c3Q6MToxfGNsaWVudGlkOjQ6MjAxN3x1bmlxbmFtZTo1OkphbnVzfGNydDoxMDoxNTMwMDczODYwfHJlZm5pY2s6NTpKYW51c3x1c2VyaWQ6NDQ6bzl0Mmx1R29FaU1aR0UwOWJ3UnZ2WXVXVGMzQUB3ZWl4aW4uc29odS5jb218; pprdig=JgJWXZSd5qyjR-7Ft_M-x694LKTYP8MXaD8AD-Qo2y1-1yKldBhaYGxgwLzQ8L-n519Ye98zAMjjFH2WmROk-KbE8BCrx5oR1OJqWv-3K5dMHSDvKlA1aOZZ7LWhdRQzNi4Altau7CKgewLz2tPeG7IQZjbkSrGGdIb7l17FN-M; sgid=23-35698767-AVszEwNEoAGasSN8Ga0RtCQ; ppmdig=153007386000000060fb46dea826b38eb31290a2738d61c5; sct=1; SNUID=0C05C6C2B5B0DA2DA1398223B5644FD8; JSESSIONID=aaa7yJ2s0Nkr9chzhR7qw"
+MYSQL_HOST = 'localhost'
+MYSQL_DBNAME = 'codingatwill'
+MYSQL_USER = 'root'
+MYSQL_PASSWD = '1314'
