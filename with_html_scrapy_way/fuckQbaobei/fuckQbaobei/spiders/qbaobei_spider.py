@@ -17,7 +17,8 @@ class QBaobeiSpider(scrapy.Spider):
         allNum = ''
         for ii in allTiticle:
             allNum += ii
-        for i in range(1, int(allNum)):
+        # for i in range(1, int(allNum)):
+        for i in range(1, 50):
             yield Request(url=self.base_url_with_page.format(i), callback=self.parse_per_list_page)
 
     def parse_per_list_page(self, response):
