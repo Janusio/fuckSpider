@@ -49,7 +49,9 @@ ROBOTSTXT_OBEY = True
 #SPIDER_MIDDLEWARES = {
 #    'fuckQbaobei.middlewares.FuckqbaobeiSpiderMiddleware': 543,
 #}
-
+EXTENSIONS = {
+   'scrapy.extensions.memusage.MemoryUsage': None,
+}
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
@@ -64,9 +66,10 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'fuckQbaobei.pipelines.FuckqbaobeiPipeline': 300,
-#}
+ITEM_PIPELINES = {
+   # 'fuckQbaobei.pipelines.FuckqbaobeiPipeline': 300,
+   'fuckQbaobei.pipelines.WriteToTxtPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
