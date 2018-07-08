@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<!--[if IE 6]><html class="ie lt-ie8"><![endif]-->
+<!--[if IE 7]><html class="ie lt-ie8"><![endif]-->
+<!--[if IE 8]><html class="ie ie8"><![endif]-->
+<!--[if IE 9]><html class="ie ie9"><![endif]-->
+<!--[if !IE]><!--> <html> <!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+
+  <!-- Start of Baidu Transcode -->
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta name="applicable-device" content="pc,mobile">
+  <meta name="MobileOptimized" content="width"/>
+  <meta name="HandheldFriendly" content="true"/>
+  <meta name="mobile-agent" content="format=html5;url=https://www.jianshu.com/p/9c266216957b">
+  <!-- End of Baidu Transcode -->
+
+    <meta name="description"  content="本篇教程内容完全针对初学者，如果你需要更进阶一点的知识，本篇可能给你的帮助十分有限。 准备工作 首先确认代码环境，我们使用python来进行爬虫的开发。在这里我使用的版本是python3.5。这个教程应该适用于所有python3.x版本， python2.x可能做少许的改动就可以直接运行。 这次教程中我们要用到的模块是requests模块。如果没有安装requests模块的同学需要先安装一下...">
+
+  <meta name="360-site-verification" content="604a14b53c6b871206001285921e81d8" />
+  <meta property="wb:webmaster" content="294ec9de89e7fadb" />
+  <meta property="qc:admins" content="104102651453316562112116375" />
+  <meta property="qc:admins" content="11635613706305617" />
+  <meta property="qc:admins" content="1163561616621163056375" />
+  <meta name="google-site-verification" content="cV4-qkUJZR6gmFeajx_UyPe47GW9vY6cnCrYtCHYNh4" />
+  <meta name="google-site-verification" content="HF7lfF8YEGs1qtCE-kPml8Z469e2RHhGajy6JPVy5XI" />
+  <meta http-equiv="mobile-agent" content="format=html5; url=https://www.jianshu.com/p/9c266216957b">
+
+  <!-- Apple -->
+  <meta name="apple-mobile-web-app-title" content="简书">
+
+    <!--  Meta for Smart App Banner -->
+  <meta name="apple-itunes-app" content="app-id=888237539, app-argument=jianshu://notes/10695439">
+  <!-- End -->
+
+  <!--  Meta for Twitter Card -->
+  <meta content="summary" property="twitter:card">
+  <meta content="@jianshucom" property="twitter:site">
+  <meta content="【爬虫其实很简单】requests 与 beautiful soup基础入门" property="twitter:title">
+  <meta content="本篇教程内容完全针对初学者，如果你需要更进阶一点的知识，本篇可能给你的帮助十分有限。 准备工作 首先确认代码环境，我们使用python来进行爬虫的开发。在这里我使用的版本是p..." property="twitter:description">
+  <meta content="https://www.jianshu.com/p/9c266216957b" property="twitter:url">
+  <!-- End -->
+
+  <!--  Meta for OpenGraph -->
+  <meta property="fb:app_id" content="865829053512461">
+  <meta property="og:site_name" content="简书">
+  <meta property="og:title" content="【爬虫其实很简单】requests 与 beautiful soup基础入门">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.jianshu.com/p/9c266216957b">
+  <meta property="og:description" content="本篇教程内容完全针对初学者，如果你需要更进阶一点的知识，本篇可能给你的帮助十分有限。 准备工作 首先确认代码环境，我们使用python来进行爬虫的开发。在这里我使用的版本是python3.5。这...">
+  <!-- End -->
+
+  <!--  Meta for Facebook Applinks -->
+  <meta property="al:ios:url" content="jianshu://notes/10695439" />
+  <meta property="al:ios:app_store_id" content="888237539" />
+  <meta property="al:ios:app_name" content="简书" />
+
+  <meta property="al:android:url" content="jianshu://notes/10695439" />
+  <meta property="al:android:package" content="com.jianshu.haruki" />
+  <meta property="al:android:app_name" content="简书" />
+  <!-- End -->
+
+
+    <title>【爬虫其实很简单】requests 与 beautiful soup基础入门 - 简书</title>
+
+  <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="b90qQBX2enn1zMBPovIyFaDzKR6HzOH2kjC/7Ra3zB55SezW439hpRoaWowa5gw6DvEHb9jjwT7VafiDSr8HJg==" />
+
+  <link rel="stylesheet" media="all" href="//cdn2.jianshu.io/assets/web-2b26d78a4d3c053b7b1c.css" />
+
+  <link rel="stylesheet" media="all" href="//cdn2.jianshu.io/assets/web/pages/notes/show/entry-5428969bbd50326930bb.css" />
+
+  <link href="//cdn2.jianshu.io/assets/favicons/favicon-e743bfb1821442341c3ab15bdbe804f7ad97676bd07a770ccc9483473aa76f06.ico" rel="shortcut icon" type="image/x-icon"/>
+      <link rel="apple-touch-icon-precomposed" href="//cdn2.jianshu.io/assets/apple-touch-icons/57-a6f1f1ee62ace44f6dc2f6a08575abd3c3b163288881c78dd8d75247682a4b27.png" sizes="57x57" />
+      <link rel="apple-touch-icon-precomposed" href="//cdn2.jianshu.io/assets/apple-touch-icons/72-fb9834bcfce738fd7b9c5e31363e79443e09a81a8e931170b58bc815387c1562.png" sizes="72x72" />
+      <link rel="apple-touch-icon-precomposed" href="//cdn2.jianshu.io/assets/apple-touch-icons/76-49d88e539ff2489475d603994988d871219141ecaa0b1a7a9a1914f4fe3182d6.png" sizes="76x76" />
+      <link rel="apple-touch-icon-precomposed" href="//cdn2.jianshu.io/assets/apple-touch-icons/114-24252fe693524ed3a9d0905e49bff3cbd0228f25a320aa09053c2ebb4955de97.png" sizes="114x114" />
+      <link rel="apple-touch-icon-precomposed" href="//cdn2.jianshu.io/assets/apple-touch-icons/120-1bb7371f5e87f93ce780a5f1a05ff1b176828ee0d1d130e768575918a2e05834.png" sizes="120x120" />
+      <link rel="apple-touch-icon-precomposed" href="//cdn2.jianshu.io/assets/apple-touch-icons/152-bf209460fc1c17bfd3e2b84c8e758bc11ca3e570fd411c3bbd84149b97453b99.png" sizes="152x152" />
+
+  <!-- Start of 访问统计 -->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?0c0e9d9b1e7d617b3e6842e85b9fb068";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+  <!-- End of 访问统计 -->
+</head>
+
+  <body lang="zh-CN" class="reader-black-font">
+    <!-- 全局顶部导航栏 -->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="width-limit">
+    <!-- 左上方 Logo -->
+    <a class="logo" href="/"><img src="//cdn2.jianshu.io/assets/web/nav-logo-4c7bbafe27adc892f3046e6978459bac.png" alt="Nav logo" /></a>
+
+    <!-- 右上角 -->
+      <!-- 未登录显示登录/注册/写文章 -->
+      <a class="btn write-btn" target="_blank" href="/writer#/">
+        <i class="iconfont ic-write"></i>写文章
+</a>      <a class="btn sign-up" href="/sign_up">注册</a>
+      <a class="btn log-in" href="/sign_in">登录</a>
+
+    <!-- 如果用户登录，显示下拉菜单 -->
+
+    <div id="view-mode-ctrl">
+    </div>
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu" aria-expanded="false">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse" id="menu">
+        <ul class="nav navbar-nav">
+            <li class="tab ">
+              <a href="/">
+                <span class="menu-text">首页</span><i class="iconfont ic-navigation-discover menu-icon"></i>
+</a>            </li>
+            <li class="tab ">
+              <a id="web-nav-app-download-btn" class="app-download-btn" href="/apps?utm_medium=desktop&amp;utm_source=navbar-apps"><span class="menu-text">下载App</span><i class="iconfont ic-navigation-download menu-icon"></i></a>
+            </li>
+          <li class="search">
+            <form target="_blank" action="/search" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="&#x2713;" />
+              <input type="text" name="q" id="q" value="" autocomplete="off" placeholder="搜索" class="search-input" />
+              <a class="search-btn" href="javascript:void(null)"><i class="iconfont ic-search"></i></a>
+</form>          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<div class="note">
+    <a target="_blank" href="/apps/redirect?utm_source=side-banner-click" id="web-note-ad-fixed"><span class="close">&times;</span></a>
+  <div class="post">
+    <div class="article">
+        <h1 class="title">【爬虫其实很简单】requests 与 beautiful soup基础入门</h1>
+
+        <!-- 作者区域 -->
+        <div class="author">
+          <a class="avatar" href="/u/a852100ea2ab">
+            <img src="//upload.jianshu.io/users/upload_avatars/5419313/0f8c4d74-1f65-4d5c-893c-ae360f9ff799.png?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96" alt="96" />
+</a>          <div class="info">
+            <span class="name"><a href="/u/a852100ea2ab">BorisChen</a></span>
+            <!-- 关注用户按钮 -->
+            <div props-data-classes="user-follow-button-header" data-author-follow-button></div>
+            <!-- 文章数据信息 -->
+            <div class="meta">
+              <!-- 如果文章更新时间大于发布时间，那么使用 tooltip 显示更新时间 -->
+                <span class="publish-time" data-toggle="tooltip" data-placement="bottom" title="最后编辑于 2017.12.06 06:16">2017.03.30 04:33*</span>
+              <span class="wordage">字数 3809</span>
+            </div>
+          </div>
+          <!-- 如果是当前作者，加入编辑按钮 -->
+        </div>
+
+
+        <!-- 文章内容 -->
+        <div data-note-content class="show-content">
+          <div class="show-content-free">
+            <p><strong>本篇教程内容完全针对初学者，如果你需要更进阶一点的知识，本篇可能给你的帮助十分有限。</strong></p>
+<h1>准备工作</h1>
+<p>首先确认代码环境，我们使用python来进行爬虫的开发。在这里我使用的版本是python3.5。这个教程应该适用于所有python3.x版本， python2.x可能做少许的改动就可以直接运行。</p>
+<p>这次教程中我们要用到的模块是requests模块。如果没有安装requests模块的同学需要先安装一下。</p>
+<p>Mac端的同学先打开terminal，Windows端的同学可以按下'win + r'后调出"运行"，然后输入cmd打开命令指示行。</p>
+<div class="image-package">
+<div class="image-container" style="max-width: 694px; max-height: 392px;">
+<div class="image-container-fill" style="padding-bottom: 56.48%;"></div>
+<div class="image-view" data-width="694" data-height="392"><img data-original-src="//upload-images.jianshu.io/upload_images/5419313-7ff0c742b6042b63.png" data-original-width="694" data-original-height="392" data-original-format="image/png" data-original-filesize="33953"></div>
+</div>
+<div class="image-caption">【windows】按下win + r</div>
+</div><br>
+<div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 422px;">
+<div class="image-container-fill" style="padding-bottom: 60.29%;"></div>
+<div class="image-view" data-width="1536" data-height="926"><img data-original-src="//upload-images.jianshu.io/upload_images/5419313-fc2689f7e6741b03.png" data-original-width="1536" data-original-height="926" data-original-format="image/png" data-original-filesize="55702"></div>
+</div>
+<div class="image-caption">【windows】打开cmd</div>
+</div><br>
+<div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 504px;">
+<div class="image-container-fill" style="padding-bottom: 72.05%;"></div>
+<div class="image-view" data-width="1524" data-height="1098"><img data-original-src="//upload-images.jianshu.io/upload_images/5419313-0692c9f33d69a2b0.png" data-original-width="1524" data-original-height="1098" data-original-format="image/png" data-original-filesize="138146"></div>
+</div>
+<div class="image-caption">【Mac】打开terminal</div>
+</div><br>
+<p>打开之后输入</p>
+
+<pre><code>pip install requests
+</code></pre>
+<p>来安装这个模块。</p>
+<p>requests是一个非常方便的模块。可能你会看到有很多的代码在使用urllib的模块，这个教程没有使用这些模块的原因是因为它们相比较requests而言都比较复杂，作为一个初学者，我们没有必要一味的攀高。往往比工具更重要的是思想，我们学习的主要是思想，而非工具本身。真正的收获，一定是你忘记你的所有所学之后剩下的东西。</p>
+<p>好了我们不说废话了，开始进入正题吧！</p>
+<h1>小试身手</h1>
+<p>我们先从简单的地方开始——爬取百度的首页。</p>
+<p>打开python，输入下面的代码</p>
+<pre><code class="python">import requests
+
+r = requests.get('https://baidu.com')
+print(r.text)
+</code></pre>
+<p>你看，百度的界面我们就已经拿到了</p>
+<br>
+<div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 500px;">
+<div class="image-container-fill" style="padding-bottom: 71.54%;"></div>
+<div class="image-view" data-width="1820" data-height="1302"><img data-original-src="//upload-images.jianshu.io/upload_images/5419313-596c34324acab4b7.png" data-original-width="1820" data-original-height="1302" data-original-format="image/png" data-original-filesize="740762"></div>
+</div>
+<div class="image-caption">百度的网页文件</div>
+</div>
+<p>可能有的同学一开始这样爬会得到一个timeout的错误。如果出现了这样的情况，就是网站怀疑是一个机器人在访问自己，所以作出了一定的阻止。</p>
+<p>那怎么办呢？没有关系，我们稍微修改一下我们的代码，改成</p>
+<pre><code class="python">headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36'}
+r = requests.get('https://baidu.com', headers = headers)
+</code></pre>
+<p>headers的意思就是告诉网站，我们是一个正常的浏览器在给它发送信息，请它给我们正确的信息。</p>
+<p>同样的，很多网站不需要登录，直接就可以访问其中的内容，比如<a href="https://link.jianshu.com?t=http://www.qiushibaike.com" target="_blank" rel="nofollow">糗事百科</a>、<a href="https://link.jianshu.com?t=http://www.jiandan.net" target="_blank" rel="nofollow">煎蛋网</a>等等都可以直接爬取下来。</p>
+<p>怎么样，是不是有一丝小小的成就感？</p>
+<p>你可能就会问了，网页文件里面有那么多的无用信息，我们要怎么把它提取出来呢？</p>
+<p>这个时候我们通常有两种做法，一种是正则表达式，一种是通过网页的结构对内容提取。</p>
+<p>因为正则表达式相较后者更为复杂，对新手并不十分友好。所以我们这次的爬虫使用直接对网页的内容进行提取的方法来获取信息。如果你很想了解正则表达式的使用方式，你可以期待本教程的后续更新或者崔庆才老师博客中的<a href="https://link.jianshu.com?t=http://cuiqingcai.com/977.html" target="_blank" rel="nofollow">正则表达式教程</a>。</p>
+<h1>Beautiful soup 的安装</h1>
+<p>Beautiful soup是另一个python的模块，我们将用这个模块来分解网页的结构，并对其中的内容进行提取。</p>
+<p>同样的，Beautiful soup是一个第三方模块，我们需要使用</p>
+<pre><code>pip install beautifulsoup4
+</code></pre>
+<p>来对模块进行安装。</p>
+<p>但是这还不够，Beautiful soup需要lxml包对文件进行处理，所以在安装完bs4之后你还需要安装lxml包：</p>
+<pre><code>pip install lxml
+</code></pre>
+<h1>踏上正轨</h1>
+<p>在进一步讲Beautiful soup的使用之前，我们先分析一下要爬取的网页的结构，这样我们才能更加有效的针对网页的结构对网页的内容进行提取。</p>
+<p>这里我们以<a href="https://link.jianshu.com?t=http://www.qiushibaike.com" target="_blank" rel="nofollow">糗事百科</a>为例进行讲解。</p>
+<p>第一件事仍然是我们先把它的页面爬取下来，也就是</p>
+<pre><code class="python">import requests
+
+
+headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36'}
+r = requests.get('http://www.qiushibaike.com', headers = headers)
+content = r.text
+print(content)
+</code></pre>
+<p>可以看到网页的内容已经被我们储存到了content变量中，打印出来是这样的：</p>
+<br>
+<div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 500px;">
+<div class="image-container-fill" style="padding-bottom: 71.54%;"></div>
+<div class="image-view" data-width="1820" data-height="1302"><img data-original-src="//upload-images.jianshu.io/upload_images/5419313-ae2bbd4ca65ff888.png" data-original-width="1820" data-original-height="1302" data-original-format="image/png" data-original-filesize="388856"></div>
+</div>
+<div class="image-caption">content</div>
+</div>
+<p>接下来我们来分析网站的结构。</p>
+<p>可能你也发现了，直接使用我们打印出来的结果分析起来十分吃力。所以我们使用更加高效的工具——开发者工具（Developer tools）来进行分析。</p>
+<p>通常来说任何一个浏览器都有开发者工具，这里我们以Chrome为例。</p>
+<p>Mac端在打开糗事百科之后按下option+command+I， Windows端直接按下F12即可。</p>
+<div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 507px;">
+<div class="image-container-fill" style="padding-bottom: 72.52%;"></div>
+<div class="image-view" data-width="2438" data-height="1768"><img data-original-src="//upload-images.jianshu.io/upload_images/5419313-3ff36f948987097c.png" data-original-width="2438" data-original-height="1768" data-original-format="image/png" data-original-filesize="644266"></div>
+</div>
+<div class="image-caption">Developer tools</div>
+</div>
+<p>可以看到，只要我们鼠标移到对应的标签(HTML tag)上，chrome就会帮我们把标签里面包含的网页内容高亮出来。</p>
+<p>我们要的内容很简单，就是里面的段子。所以我们右键点击段子所在的位置，点击审查元素（Inspect），chrome就会自动找到该内容对应的标签。</p>
+<br>
+<div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 287px;">
+<div class="image-container-fill" style="padding-bottom: 41.08%;"></div>
+<div class="image-view" data-width="1962" data-height="806"><img data-original-src="//upload-images.jianshu.io/upload_images/5419313-14f16378a7007f33.png" data-original-width="1962" data-original-height="806" data-original-format="image/png" data-original-filesize="362927"></div>
+</div>
+<div class="image-caption">审查元素</div>
+</div><br>
+<p>可以看到我们要的段子的内容就储存在这个叫做span的标签中。</p>
+<br>
+<div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 507px;">
+<div class="image-container-fill" style="padding-bottom: 72.52%;"></div>
+<div class="image-view" data-width="2438" data-height="1768"><img data-original-src="//upload-images.jianshu.io/upload_images/5419313-24d6a88de120d60d.png" data-original-width="2438" data-original-height="1768" data-original-format="image/png" data-original-filesize="615515"></div>
+</div>
+<div class="image-caption">段子内容</div>
+</div>
+<p>我们再往上追寻，可以看到&lt;span&gt;标签是属于一个叫做&lt;div class="content"&gt;的标签的。继续往上我们可以看到一个叫做&lt;div class="article block untagged mb15" id =....&gt;的标签。</p>
+<div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 507px;">
+<div class="image-container-fill" style="padding-bottom: 72.52%;"></div>
+<div class="image-view" data-width="2438" data-height="1768"><img data-original-src="//upload-images.jianshu.io/upload_images/5419313-8b3adc394a898616.png" data-original-width="2438" data-original-height="1768" data-original-format="image/png" data-original-filesize="634956"></div>
+</div>
+<div class="image-caption">&lt;div class="article block untagged mb15" id =....&gt;</div>
+</div>
+<p>点击旁边的小三角，合并标签里面的内容之后我们可以看到有非常多这样格式的标签。而且每一个标签都对应了一个段子。</p>
+<div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 507px;">
+<div class="image-container-fill" style="padding-bottom: 72.52%;"></div>
+<div class="image-view" data-width="2438" data-height="1768"><img data-original-src="//upload-images.jianshu.io/upload_images/5419313-f6e8cc2fb1d4dd31.png" data-original-width="2438" data-original-height="1768" data-original-format="image/png" data-original-filesize="783103"></div>
+</div>
+<div class="image-caption">有很多这样的标签</div>
+</div>
+<p>所以很显然，我们只要把这样的标签都提取出来，我们就可以得到糗事百科中的段子了。</p>
+<p>所以现在我们明确了方向——把所有class为article block untagged mb15的div标签找到，然后获取里面span标签的内容。这就是我们要找的段子了。</p>
+<p>那要怎么写呢？</p>
+<p>首先我们把我们需要的内容转换到Beautiful soup中。</p>
+<pre><code class="python"># 引入Beautiful Soup包
+from bs4 import BeautifulSoup
+
+# 把刚刚保存在content中的文件放入Beautiful Soup中
+soup = BeautifulSoup(content, 'lxml')
+</code></pre>
+<p>你可能会奇怪后面的'lxml'是什么意思。其实这是因为我们的content是一个字符串(string)数据，它并不是网页文件。所以这里我们告诉Beautiful soup说你就把他当一个网页文件来处理就行。</p>
+<p>到目前为止， 我们已经把网页的内容放入了Beautiful soup中，接下来就是施展Beautiful soup的魔法，把网页分成一块块的内容了。</p>
+<h1>施展魔法</h1>
+<p>注意，在进行下一步之前你应该确认一下目前我们的代码是这样的：</p>
+<pre><code class="python">import requests
+from bs4 import BeautifulSoup
+
+
+headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36'}
+r = requests.get('http://www.qiushibaike.com', headers = headers)
+content = r.text
+soup = BeautifulSoup(content, 'lxml')
+</code></pre>
+<p>还记得吗？我们分析的结果是说所有的段子都在网页中class为article block untagged mb15的div标签中的span标签中。看起来好像有点复杂，没事，我们一步一步来做。</p>
+<p>首先我们分解出所有class为article block untagged mb15标签：</p>
+<pre><code class="python">divs = soup.find_all(class_ = 'article block untagged mb15')
+</code></pre>
+<p>我们可以打印出divs看看是什么样子的。</p>
+<pre><code class="python">print(divs)
+</code></pre>
+<div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 500px;">
+<div class="image-container-fill" style="padding-bottom: 71.54%;"></div>
+<div class="image-view" data-width="1820" data-height="1302"><img data-original-src="//upload-images.jianshu.io/upload_images/5419313-e88b92a92eaedbf0.png" data-original-width="1820" data-original-height="1302" data-original-format="image/png" data-original-filesize="532995"></div>
+</div>
+<div class="image-caption">divs</div>
+</div>
+<p>可以看到，所有div的标签都已经储存在divs里面了。</p>
+<p>在进行下一步之前我们再确认一下，这个时候你的代码应该是这个样子的：</p>
+<pre><code class="python">import requests
+from bs4 import BeautifulSoup
+
+
+headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36'}
+r = requests.get('http://www.qiushibaike.com', headers = headers)
+content = r.text
+soup = BeautifulSoup(r.text, 'lxml')
+
+divs = soup.find_all(class_ = 'article block untagged mb15')
+print(divs)
+</code></pre>
+<p>接下来我们要做的事情就是把这些div里面的span都取出来。</p>
+<p>我们先把最后一行去掉，避免不必要的打印。然后提取出每个div里面的span</p>
+<pre><code class="python">for div in divs:
+    joke = div.span.get_text()
+    print(joke)
+    print(‘------’)
+</code></pre>
+<p>注意，这个时候你的代码看起来应该是这样的：</p>
+<pre><code class="python">import requests
+from bs4 import BeautifulSoup
+
+
+headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36'}
+r = requests.get('http://www.qiushibaike.com', headers = headers)
+content = r.text
+soup = BeautifulSoup(r.text, 'lxml')
+
+divs = soup.find_all(class_ = 'article block untagged mb15')
+
+for div in divs:
+    joke = div.span.get_text()
+    print(joke)
+    print('------')
+
+</code></pre>
+<p>这段代码的意思就是把divs中的每个div都取出来(还记得吗，divs里面有所有的class为article block untagged mb15的div)。取出来之后我们对它说，你把你里面叫做span的标签的文字都给我吧。于是我们就把这里面的笑话都放进了joke当中，并打印了出来。</p>
+<p>运行一下程序，可以看到你已经成功把糗事百科首页上面的所有段子爬下来了！</p>
+<div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 500px;">
+<div class="image-container-fill" style="padding-bottom: 71.54%;"></div>
+<div class="image-view" data-width="1820" data-height="1302"><img data-original-src="//upload-images.jianshu.io/upload_images/5419313-b05182ec10952a6d.png" data-original-width="1820" data-original-height="1302" data-original-format="image/png" data-original-filesize="638230"></div>
+</div>
+<div class="image-caption">你成功了！</div>
+</div>
+<p>恭喜你已经成功入门了python的爬虫。你现在可以给自己鼓鼓掌👏</p>
+<p>爬虫并没有那么难，对吗？</p>
+<h1>one more thing</h1>
+<p>我们把打印的内容拉到最后面，发现一些读不通的语句：</p>
+<div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 500px;">
+<div class="image-container-fill" style="padding-bottom: 71.54%;"></div>
+<div class="image-view" data-width="1820" data-height="1302"><img data-original-src="//upload-images.jianshu.io/upload_images/5419313-f3c752aa80857c9d.png" data-original-width="1820" data-original-height="1302" data-original-format="image/png" data-original-filesize="610697"></div>
+</div>
+<div class="image-caption">第三行不知道在说什么</div>
+</div>
+<p>我们回到糗事百科的首页看看</p>
+<div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 507px;">
+<div class="image-container-fill" style="padding-bottom: 72.52%;"></div>
+<div class="image-view" data-width="2438" data-height="1768"><img data-original-src="//upload-images.jianshu.io/upload_images/5419313-f1a9157a14f7fc48.png" data-original-width="2438" data-original-height="1768" data-original-format="image/png" data-original-filesize="1879412"></div>
+</div>
+<div class="image-caption">原来是有图片</div>
+</div>
+<p>原来是有图片，怪不得光看字看不懂。那我们的爬虫现在还不能爬下来图片，那有没有什么办法让这些莫名其妙的话都删掉呢？</p>
+<p>我想你也应该想到了，同样的，我们去分析网页的结构，然后告诉python，如果存在带有图片的网页结构，我们就不打印这个段子。</p>
+<p>我们打开开发者工具。（你还记得快捷键吗？）然后右键点击图片，审查元素。</p>
+<div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 507px;">
+<div class="image-container-fill" style="padding-bottom: 72.52%;"></div>
+<div class="image-view" data-width="2438" data-height="1768"><img data-original-src="//upload-images.jianshu.io/upload_images/5419313-d5a124ccdf3fcce2.png" data-original-width="2438" data-original-height="1768" data-original-format="image/png" data-original-filesize="1208319"></div>
+</div>
+<div class="image-caption">打开开发者工具</div>
+</div>
+<p>我们看到，图片的网页标签（HTML tag）是img，所以我们只要在代码中检测div中是否有img标签，我们是不是就知道是不是要打印这条段子了呢？</p>
+<p>别急，我们先看看把div里面的img都打印出来是什么样子的。</p>
+<pre><code class="python">for div in divs:
+    # 在这里我们找到所有的img标签，然后打印
+    print(div.find_all('img'))
+    joke = div.span.get_text()
+    print(joke)
+    print('------')
+</code></pre>
+<div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 500px;">
+<div class="image-container-fill" style="padding-bottom: 71.54%;"></div>
+<div class="image-view" data-width="1820" data-height="1302"><img data-original-src="//upload-images.jianshu.io/upload_images/5419313-a2f14480b957203c.png" data-original-width="1820" data-original-height="1302" data-original-format="image/png" data-original-filesize="713037"></div>
+</div>
+<div class="image-caption">几乎每一条里面都有图片</div>
+</div>
+<p>看来不行， 我们看到几乎每一条里面都有图片。我们回到chrome再看看div里面的结构，原来图片不只段子里面的图片，还包括了发帖人的头像，评论区的点赞图标等等。</p>
+<p>那看来仅仅是看是否img标签来判断还是不够的，那我们就只好再看看别的结构，看看有没有更有效的结构。</p>
+<p>段子图片的img标签再往上找几层我们不难发现，它们都存在一个&lt;div class="thumb"&gt;的标签之下。而那些没有图片的段子就没有&lt;div class="thumb"&gt;这个标签。</p>
+<p>所以你成功发现了解决的方法——只要找每个总的div里面是否有&lt;div class="thumb"&gt;标签就知道这个段子里面是否包含图片了。</p>
+<p>那我们继续修改我们的循环：</p>
+<pre><code class="python">for div in divs:
+    if div.find_all(class_ = 'thumb'):
+        continue
+    joke = div.span.get_text()
+    print(joke)
+    print('------')
+</code></pre>
+<p><code>if div.find_all(class_ = 'thumb')</code>的意思就是检查<code>div.find_all(class_ = 'thumb')</code>中有没有找到class为thumb的标签，如果找到了，那就说明我们不打印这一段，所以执行<code>continue</code>。<code>continue</code>的意思就是跳到循环末尾，直接进入下一层循环，中间的代码都不要执行了，所以我们的代码最后看起来是这样的：</p>
+<pre><code class="python">import requests
+from bs4 import BeautifulSoup
+
+
+headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36'}
+r = requests.get('http://www.qiushibaike.com', headers = headers)
+content = r.text
+soup = BeautifulSoup(r.text, 'lxml')
+
+divs = soup.find_all(class_ = 'article block untagged mb15')
+
+for div in divs:
+    if div.find_all(class_ = 'thumb'):
+        continue
+    joke = div.span.get_text()
+    print(joke)
+    print('------')
+</code></pre>
+<p>运行一下，可以发现我们已经已经看不到有图片的段子了。</p>
+<div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 500px;">
+<div class="image-container-fill" style="padding-bottom: 71.54%;"></div>
+<div class="image-view" data-width="1820" data-height="1302"><img data-original-src="//upload-images.jianshu.io/upload_images/5419313-d7ee84c2432db49a.png" data-original-width="1820" data-original-height="1302" data-original-format="image/png" data-original-filesize="701436"></div>
+</div>
+<div class="image-caption">非常的干净</div>
+</div>
+<p>恭喜你，你已经学会了如何去分析网页的结构，这是非常重要的一步，学会分析的方法比学会任何工具都要有用。</p>
+<p>而且你做的非常好！你现在可以去喝一杯咖啡，吃点饼干，休息一下。</p>
+<p>如果你精力还很充沛，不妨思考一下，能不能把每个段子的作者，点赞数，评论数都提取出来呢？</p>
+<h1>Bonus</h1>
+<p>到目前为止，我们已经成功的提取了糗事百科首页的段子。可能精力充沛的同学还成功提取了每条段子的作者、点赞数等等。</p>
+<p>笑话永远是不嫌多的～可能你觉得只看一页的笑话已经满足不了你了，那我们就来试试提取前四页的内容。</p>
+<p>我们先点开糗事百科的第二页，看看和第一页有什么不同。</p>
+<div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 494px;">
+<div class="image-container-fill" style="padding-bottom: 70.71%;"></div>
+<div class="image-view" data-width="2438" data-height="1724"><img data-original-src="//upload-images.jianshu.io/upload_images/5419313-9ccd6cf0a0db13ee.png" data-original-width="2438" data-original-height="1724" data-original-format="image/png" data-original-filesize="1370743"></div>
+</div>
+<div class="image-caption">网址发生了变化</div>
+</div>
+<p>可以看到网址发生了变化。从<code>http:qiushibaike.com</code>变成了一长串的<code>http://www.qiushibaike.com/8hr/page/2/?s=4969792</code>。注意到网址中有<code>/page/2/</code>，page是页的意思，很有可能就是这一块在控制页码。</p>
+<p>光猜肯定不行，我们来试一试把2改成3会发生什么。</p>
+<div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 494px;">
+<div class="image-container-fill" style="padding-bottom: 70.71%;"></div>
+<div class="image-view" data-width="2438" data-height="1724"><img data-original-src="//upload-images.jianshu.io/upload_images/5419313-ec88ac0b3d0a4526.png" data-original-width="2438" data-original-height="1724" data-original-format="image/png" data-original-filesize="435587"></div>
+</div>
+<div class="image-caption">第二页变成了第三页</div>
+</div>
+<p>第二页变成了第三页，那看来确确实实就是/page/之后的数字在控制页码。但是除了page之外，网址后面还跟着一串很奇怪的东西——<code>?s=4969792</code>，那这么一长串是在干什么呢？</p>
+<p>这就和我们下一节要讲的GET和POST有关了。我们在进入下一节之前简单介绍一下。</p>
+<p>在访问糗事百科的时候我们的浏览器会给网站发送一个识别码，这个识别码就是后面的那一串数字，说明一直是你在访问它。</p>
+<p>某种意义上讲这样的识别码也可以帮助糗事百科分析用户习惯，因为一个识别码对应一个用户，通过这个识别码访问糗事百科的内容的时候，糗事百科就知道你的用户行为。</p>
+<p>当然，如果你换了一串数字，访问也是可以正常进行的。比如我随便一改后面的这串数字，</p>
+<div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 494px;">
+<div class="image-container-fill" style="padding-bottom: 70.71%;"></div>
+<div class="image-view" data-width="2438" data-height="1724"><img data-original-src="//upload-images.jianshu.io/upload_images/5419313-9509d000e0443306.png" data-original-width="2438" data-original-height="1724" data-original-format="image/png" data-original-filesize="1104867"></div>
+</div>
+<div class="image-caption">正常打开</div>
+</div>
+<p>网站还是正常的出现了。那这个<code>s=1231421</code>就是浏览器在发送GET请求的时候的附加数据。换句话讲，就是浏览器在给网站说，麻烦你给我一下最新的笑话，要第二页的。对的，我还是刚刚的那个王老五。</p>
+<p>那如果你改了后面的这串数字，就相当于给网站说，我其实是隔壁老王，不是刚刚的那个王老五。不过还是麻烦你把第二页的笑话给我看一看。</p>
+<p>所以你现在明白了，GET就是浏览器在向网站索要网页信息，在索要网页的同时也可能会发送一些信息给网站。</p>
+<p>如果我们删掉<code>?s=xxxxx</code>，可以看到网页还是会正常的加载。也就是在浏览器在发送GET请求的时候没有附加任何的信息。</p>
+<p>还记得我们最开始的目标吗——拿到糗事百科前四页的段子。所以这个时候我们只需要通过循环对网址进行一个修改，分别访问糗事百科四次，提取四次就可以了。</p>
+<p>知道了方法，我们现在就用代码来实现它。</p>
+<p>在这里我强烈建议你暂停一下，不要往下翻。试试自己写能不能把代码写出来，如果实在不行再看看下面的代码。</p>
+<p>编程是一门动手的艺术，橘子只有自己尝尝才知道是什么味道～</p>
+<pre><code class="python">import requests
+from bs4 import BeautifulSoup
+
+
+headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36'}
+
+base_url = 'http://www.qiushibaike.com/8hr/page/'  # 设定一个网址不变的部分，然后我们只要每次在这个后面加数字就可以了
+
+for num in range(1, 5): # 设置循环，让num分别等于1-10
+    print('第{}页'.format(num))
+
+    r = requests.get(base_url + str(num), headers = headers) #这里对网址进行一个修改
+
+    #剩下的部分都是和原来的代码一样
+    content = r.text
+    soup = BeautifulSoup(r.text, 'lxml')
+
+    divs = soup.find_all(class_ = 'article block untagged mb15')
+
+    for div in divs:
+        if div.find_all(class_ = 'thumb'):
+            continue
+        joke = div.span.get_text()
+        print(joke)
+        print('------')
+</code></pre>
+<p>运行一下，可以看到你已经成功的拿到了前四页的笑话。</p>
+<div class="image-package">
+<div class="image-container" style="max-width: 700px; max-height: 501px;">
+<div class="image-container-fill" style="padding-bottom: 71.67%;"></div>
+<div class="image-view" data-width="1758" data-height="1260"><img data-original-src="//upload-images.jianshu.io/upload_images/5419313-3794fd197e519292.png" data-original-width="1758" data-original-height="1260" data-original-format="image/png" data-original-filesize="675944"></div>
+</div>
+<div class="image-caption">你又成功了！</div>
+</div>
+<h1>返回导航</h1>
+<p><a href="https://www.jianshu.com/p/91f8b6ec7db9" target="_blank">导航</a></p>
+<p><strong>本篇教程代码文件业已上传Github，<a href="https://link.jianshu.com?t=https://github.com/BorisChenCZY/web-bot-is-actually-very-simple/tree/master/quick%20tutorial%20of%20request%20and%20bs4" target="_blank" rel="nofollow">点击这里</a>访问</strong></p>
+
+          </div>
+        </div>
+    </div>
+
+    <!-- 如果是付费文章，未购买，则显示购买按钮 -->
+
+    <!-- 连载目录项 -->
+
+    <!-- 如果是付费文章 -->
+      <!-- 如果是付费连载，已购买，且作者允许赞赏，则显示付费信息和赞赏 -->
+        <div data-vcomp="free-reward-panel"></div>
+
+      <div class="show-foot">
+        <a class="notebook" href="/nb/11258854">
+          <i class="iconfont ic-search-notebook"></i>
+          <span>爬虫其实很简单</span>
+</a>        <div class="copyright" data-toggle="tooltip" data-html="true" data-original-title="转载请联系作者获得授权，并标注“简书作者”。">
+          © 著作权归作者所有
+        </div>
+        <div class="modal-wrap" data-report-note>
+          <a id="report-modal">举报文章</a>
+        </div>
+      </div>
+
+      <!-- 文章底部作者信息 -->
+        <div class="follow-detail">
+          <div class="info">
+            <a class="avatar" href="/u/a852100ea2ab">
+              <img src="//upload.jianshu.io/users/upload_avatars/5419313/0f8c4d74-1f65-4d5c-893c-ae360f9ff799.png?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96" alt="96" />
+</a>            <div props-data-classes="user-follow-button-footer" data-author-follow-button></div>
+            <a class="title" href="/u/a852100ea2ab">BorisChen</a>
+          </div>
+            <div class="signature">SUSTCer</div>
+        </div>
+
+    <div class="meta-bottom">
+      <div class="btn like-group"></div>
+      <div class="share-group">
+        <a class="share-circle" data-action="weixin-share" data-toggle="tooltip" data-original-title="分享到微信">
+          <i class="iconfont ic-wechat"></i>
+        </a>
+        <a class="share-circle" data-action="weibo-share" data-toggle="tooltip" href="javascript:void((function(s,d,e,r,l,p,t,z,c){var%20f=&#39;http://v.t.sina.com.cn/share/share.php?appkey=1881139527&#39;,u=z||d.location,p=[&#39;&amp;url=&#39;,e(u),&#39;&amp;title=&#39;,e(t||d.title),&#39;&amp;source=&#39;,e(r),&#39;&amp;sourceUrl=&#39;,e(l),&#39;&amp;content=&#39;,c||&#39;gb2312&#39;,&#39;&amp;pic=&#39;,e(p||&#39;&#39;)].join(&#39;&#39;);function%20a(){if(!window.open([f,p].join(&#39;&#39;),&#39;mb&#39;,[&#39;toolbar=0,status=0,resizable=1,width=440,height=430,left=&#39;,(s.width-440)/2,&#39;,top=&#39;,(s.height-430)/2].join(&#39;&#39;)))u.href=[f,p].join(&#39;&#39;);};if(/Firefox/.test(navigator.userAgent))setTimeout(a,0);else%20a();})(screen,document,encodeURIComponent,&#39;&#39;,&#39;&#39;,&#39;http://cwb.assets.jianshu.io/notes/images/10695439/weibo/image_fc0776cc6591.jpg&#39;, &#39;推荐 BorisChen 的文章《【爬虫其实很简单】requests 与 beautiful soup基础入门》（ 分享自 @简书 ）&#39;,&#39;https://www.jianshu.com/p/9c266216957b?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=weibo&#39;,&#39;页面编码gb2312|utf-8默认gb2312&#39;));" data-original-title="分享到微博">
+          <i class="iconfont ic-weibo"></i>
+        </a>
+          <a class="share-circle" data-toggle="tooltip" href="http://cwb.assets.jianshu.io/notes/images/10695439/weibo/image_fc0776cc6591.jpg" target="_blank" data-original-title="下载长微博图片">
+            <i class="iconfont ic-picture"></i>
+          </a>
+        <a class="share-circle more-share" tabindex="0" data-toggle="popover" data-placement="top" data-html="true" data-trigger="focus" href="javascript:void(0);" data-content='
+          <ul class="share-list">
+            <li><a href="javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=&#39;+e(&#39;https://www.jianshu.com/p/9c266216957b?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=qzone&#39;)+&#39;&amp;title=&#39;+e(&#39;推荐 BorisChen 的文章《【爬虫其实很简单】requests 与 beautiful soup基础入门》&#39;),x=function(){if(!window.open(r,&#39;qzone&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=600,height=600&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();"><i class="social-icon-sprite social-icon-zone"></i><span>分享到QQ空间</span></a></li>
+            <li><a href="javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;https://twitter.com/share?url=&#39;+e(&#39;https://www.jianshu.com/p/9c266216957b?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=twitter&#39;)+&#39;&amp;text=&#39;+e(&#39;推荐 BorisChen 的文章《【爬虫其实很简单】requests 与 beautiful soup基础入门》（ 分享自 @jianshucom ）&#39;)+&#39;&amp;related=&#39;+e(&#39;jianshucom&#39;),x=function(){if(!window.open(r,&#39;twitter&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=600,height=600&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();"><i class="social-icon-sprite social-icon-twitter"></i><span>分享到Twitter</span></a></li>
+            <li><a href="javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;https://www.facebook.com/dialog/share?app_id=483126645039390&amp;display=popup&amp;href=https://www.jianshu.com/p/9c266216957b?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=facebook&#39;,x=function(){if(!window.open(r,&#39;facebook&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();"><i class="social-icon-sprite social-icon-facebook"></i><span>分享到Facebook</span></a></li>
+            <li><a href="javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;https://plus.google.com/share?url=&#39;+e(&#39;https://www.jianshu.com/p/9c266216957b?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=google_plus&#39;),x=function(){if(!window.open(r,&#39;google_plus&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();"><i class="social-icon-sprite social-icon-google"></i><span>分享到Google+</span></a></li>
+            <li><a href="javascript:void(function(){var d=document,e=encodeURIComponent,s1=window.getSelection,s2=d.getSelection,s3=d.selection,s=s1?s1():s2?s2():s3?s3.createRange().text:&#39;&#39;,r=&#39;http://www.douban.com/recommend/?url=&#39;+e(&#39;https://www.jianshu.com/p/9c266216957b?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=douban&#39;)+&#39;&amp;title=&#39;+e(&#39;【爬虫其实很简单】requests 与 beautiful soup基础入门&#39;)+&#39;&amp;sel=&#39;+e(s)+&#39;&amp;v=1&#39;,x=function(){if(!window.open(r,&#39;douban&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330&#39;))location.href=r+&#39;&amp;r=1&#39;};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})()"><i class="social-icon-sprite social-icon-douban"></i><span>分享到豆瓣</span></a></li>
+          </ul>
+        '>更多分享</a>
+      </div>
+    </div>
+      <a id="web-note-ad-1" target="_blank" href="/apps/redirect?utm_source=note-bottom-click"><img src="//cdn2.jianshu.io/assets/web/web-note-ad-1-c2e1746859dbf03abe49248893c9bea4.png" alt="Web note ad 1" /></a>
+    <div id="vue_comment"></div>
+  </div>
+
+  <div class="vue-side-tool" props-data-props-show-qr-code="0"></div>
+</div>
+<div class="note-bottom">
+  <div class="js-included-collections"></div>
+  <div data-vcomp="recommended-notes" data-lazy="1.5" data-note-id="10695439"></div>
+  <!-- 相关文章 -->
+  <div class="seo-recommended-notes">
+
+        <div class="note have-img">
+          <a class="cover" target="_blank" href="/p/e52e85a3ce48?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <img src="//upload-images.jianshu.io/upload_images/8707342-d2149d14ad8c24c3?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240" alt="240" />
+</a>          <a class="title" target="_blank" href="/p/e52e85a3ce48?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">一小时入门 Python 3 网络爬虫</a>
+          <p class="description">声明：本文讲解的实战内容，均仅用于学习交流，请勿用于任何商业用途！ 一、前言 强烈建议：请在电脑的陪同下，阅读本文。本文以实战为主，阅读过程如稍有不适，还望多加练习。 本文的实战内容有： 网络小说下载（静态网站） 优美壁纸下载（动态网站） 爱奇艺VIP视频下载 二、网络爬虫...</p>
+          <a class="author" target="_blank" href="/u/ebb2bac1bfba?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <div class="avatar">
+              <img src="//upload.jianshu.io/users/upload_avatars/8707342/ec607c8e-0d2d-455f-999d-d9b53e25742e.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/48/h/48" alt="48" />
+            </div>
+            <span class="name">Bruce_Szh</span>
+</a>        </div>
+
+        <div class="note have-img">
+          <a class="cover" target="_blank" href="/p/41d06a4ed896?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <img src="//upload-images.jianshu.io/upload_images/6111969-f1501a78264abc88.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240" alt="240" />
+</a>          <a class="title" target="_blank" href="/p/41d06a4ed896?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">python爬虫里信息提取的核心方法: Beautifulsoup Xpath 正则表达式</a>
+          <p class="description">20170531 这几天重新拾起了爬虫，算起来有将近5个月不碰python爬虫了。 对照着网上的程序和自己以前写的抓图的程序进行了重写，发现了很多问题。总结和归纳和提高学习效果的有效手段，因此对于这些问题做个归纳和总结，一方面总结学习成果，使之成为自己的东西，另一方面希望能...</p>
+          <a class="author" target="_blank" href="/u/ff6ccbf9b40d?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <div class="avatar">
+              <img src="//upload.jianshu.io/users/upload_avatars/6111969/c7833d7c-a72a-4aab-a148-689fef49c17c.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/48/h/48" alt="48" />
+            </div>
+            <span class="name">八神苍月</span>
+</a>        </div>
+
+        <div class="note ">
+                    <a class="title" target="_blank" href="/p/7d6b581e6d76?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">记录下BS4的基础使用方法</a>
+          <p class="description">Beautiful Soup是一个可以从HTML或XML文件中提取数据的Python库.它能够通过你喜欢的转换器实现惯用的文档导航,查找,修改文档的方式.Beautiful Soup会帮你节省数小时甚至数天的工作时间. 文档地址:http://beautifulsoup.r...</p>
+          <a class="author" target="_blank" href="/u/605514bea9fb?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <div class="avatar">
+              <img src="//upload.jianshu.io/users/upload_avatars/5803985/07ac9d64-aca7-452b-8787-10828ed1ddcb?imageMogr2/auto-orient/strip|imageView2/1/w/48/h/48" alt="48" />
+            </div>
+            <span class="name">LitOrange</span>
+</a>        </div>
+
+        <div class="note have-img">
+          <a class="cover" target="_blank" href="/p/69b2cc1b9438?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <img src="//upload-images.jianshu.io/upload_images/938707-d0e61e35c9e6143f.png?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240" alt="240" />
+</a>          <a class="title" target="_blank" href="/p/69b2cc1b9438?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">008 - 爬虫处理流程及网页解析</a>
+          <p class="description">爬虫处理流程： 将互联网上的网页获取到本地 对网页进行解析网页解析是从网页中分离出我们所需要的、有价值的信息，以及新的待爬取的URL。网页的解析的方法：正则表达式（采用模糊匹配的方式，找出我们所需要内容）BeautifulSoup（是一个可以从HTML或XML文件中提取数据...</p>
+          <a class="author" target="_blank" href="/u/54b5900965ea?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <div class="avatar">
+              <img src="//upload.jianshu.io/users/upload_avatars/938707/a9b1aa2c94db?imageMogr2/auto-orient/strip|imageView2/1/w/48/h/48" alt="48" />
+            </div>
+            <span class="name">向右奔跑</span>
+</a>        </div>
+
+        <div class="note have-img">
+          <a class="cover" target="_blank" href="/p/11a2105c0dfb?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <img src="//upload-images.jianshu.io/upload_images/832668-bb492030e6b6cddd.png?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240" alt="240" />
+</a>          <a class="title" target="_blank" href="/p/11a2105c0dfb?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">使用 Beautiful Soup 解析网页内容</a>
+          <p class="description">安装Beautiful Soup Beautiful Soup是一个Python的HTML解析框架，我们可以利用它方便的处理HTML和XML文档。Beautiful Soup有3和4两个版本，目前3已经停止开发。所以我们当然还是学习最新的Beautiful Soup 4. ...</p>
+          <a class="author" target="_blank" href="/u/7753478e1554?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <div class="avatar">
+              <img src="//upload.jianshu.io/users/upload_avatars/832668/e9518d40b6fe?imageMogr2/auto-orient/strip|imageView2/1/w/48/h/48" alt="48" />
+            </div>
+            <span class="name">乐百川</span>
+</a>        </div>
+
+        <div class="note have-img">
+          <a class="cover" target="_blank" href="/p/7e81ba6e811d?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <img src="//upload-images.jianshu.io/upload_images/3235076-304acb45b10a6223.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240" alt="240" />
+</a>          <a class="title" target="_blank" href="/p/7e81ba6e811d?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">薰衣草田</a>
+          <p class="description">手指绘图，用schetches这个app画的，笔触效果很赞！</p>
+          <a class="author" target="_blank" href="/u/b00cffff7285?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <div class="avatar">
+              <img src="//cdn2.jianshu.io/assets/default_avatar/13-394c31a9cb492fcb39c27422ca7d2815.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/48/h/48" alt="48" />
+            </div>
+            <span class="name">ashleel</span>
+</a>        </div>
+
+        <div class="note ">
+                    <a class="title" target="_blank" href="/p/f75a16d3e9c4?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">近视手术后是种什么体验？</a>
+          <p class="description">近视手术后是种什么体验？大家非常感兴趣的就是近视手术后是种什么体验，会有什么样的感觉。 体验一：疲惫感 有些患者会感到眼皮很重，就像连续一两天通宵打网游后又去上课的感觉。导致这种情况的原因有二： 其一、人体自卫机制所致； 其二、术中用开睑器撑开眼睑撑的太久，眼球多少受了一点...</p>
+          <a class="author" target="_blank" href="/u/0b4462a50010?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <div class="avatar">
+              <img src="//cdn2.jianshu.io/assets/default_avatar/8-a356878e44b45ab268a3b0bbaaadeeb7.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/48/h/48" alt="48" />
+            </div>
+            <span class="name">关注眼部健康</span>
+</a>        </div>
+
+        <div class="note ">
+                    <a class="title" target="_blank" href="/p/4b96356727dd?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">九月，我的第一个周末</a>
+          <p class="description">今天——我的九月第一个周末。 请别质疑我的健康，请别质疑我的记忆！ 我一定知道普天之下皆为二0一七年九月十七日，它在咱们的日历里是九月第三个周末。 可是在我的日子里，地地道道是第一个周末。真的，一点也不骗你，不骗你！ 日历中九月的第一个周末，居然是娃娃们今秋第一个上学的日子...</p>
+          <a class="author" target="_blank" href="/u/25b75106f2af?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <div class="avatar">
+              <img src="//upload.jianshu.io/users/upload_avatars/7618502/8a0eb56b-aa7f-40ba-87ae-a2b7e8f12243.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/48/h/48" alt="48" />
+            </div>
+            <span class="name">吴大姐姐</span>
+</a>        </div>
+
+        <div class="note ">
+                    <a class="title" target="_blank" href="/p/a2ba55515a7f?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">在梦里转身</a>
+          <p class="description">声声杜鹃，啼坠湖面心事 誓言散开无尽涟漪 掌中记忆 触摸不到你手心的暖 发梢摇摆轻柔 夕阳醉了两岸枫林 眸内情深，隐没相望惆怅 升起又落下天边月 窗前脚步未响 一片花开，无声 梦里经年 寻，一抹盈盈浅笑 醉，指缝里时光</p>
+          <a class="author" target="_blank" href="/u/e75b1b264f20?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <div class="avatar">
+              <img src="//upload.jianshu.io/users/upload_avatars/6326746/d6bfe2b1-80f1-47fe-a834-1103c6985c45.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/48/h/48" alt="48" />
+            </div>
+            <span class="name">金钗银环</span>
+</a>        </div>
+
+        <div class="note have-img">
+          <a class="cover" target="_blank" href="/p/eebd169c57ee?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <img src="//upload-images.jianshu.io/upload_images/5386647-8b4cf1288f475201.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240" alt="240" />
+</a>          <a class="title" target="_blank" href="/p/eebd169c57ee?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">3.26 晨读感想</a>
+          <p class="description">一、参与 这个话题....简直让我深恶痛绝。为什么，因为税法老师啊！税法老师，一个看到传统课堂的弊端一心想提高学生课堂效率的敢于创新的热爱教育事业的人，竟成功与学校申请到实验室上课，并且，实行翻转课堂！！ 那么难的税法课，老师让我们全部课堂内容课外学，a...课堂上竟然全都...</p>
+          <a class="author" target="_blank" href="/u/f8b71e657e08?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <div class="avatar">
+              <img src="//upload.jianshu.io/users/upload_avatars/5386647/61aa22cd-b5a7-498b-91f6-cb312109a05d.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/48/h/48" alt="48" />
+            </div>
+            <span class="name">不要垃圾</span>
+</a>        </div>
+  </div>
+</div>
+
+    <script type="application/json" data-name="page-data">{"user_signed_in":false,"locale":"zh-CN","os":"windows","read_mode":"day","read_font":"font2","note_show":{"is_author":false,"is_following_author":false,"is_liked_note":false,"follow_state":0,"uuid":"4ce12a12-24d6-4828-92b0-977139ddf30d"},"note":{"id":10695439,"slug":"9c266216957b","user_id":5419313,"notebook_id":11258854,"commentable":true,"likes_count":120,"views_count":13466,"public_wordage":3809,"comments_count":41,"featured_comments_count":0,"total_rewards_count":1,"is_author":false,"paid_type":"free","paid":false,"paid_content_accessible":false,"author":{"nickname":"BorisChen","total_wordage":7268,"followers_count":206,"total_likes_count":152}}}</script>
+
+    <script src="//cdn2.jianshu.io/assets/babel-polyfill-e9c9b9785eb2c39c58e4.js" crossorigin="anonymous"></script>
+    <script src="//cdn2.jianshu.io/assets/web-base-cdd8ae61811a22f59d66.js" crossorigin="anonymous"></script>
+<script src="//cdn2.jianshu.io/assets/web-d081c337d60ea52a58e1.js" crossorigin="anonymous"></script>
+
+    <script src="//cdn2.jianshu.io/assets/web/pages/notes/show/entry-8122b69d25bb6d75bcd0.js" crossorigin="anonymous"></script>
+    <script>
+  (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+          bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else {
+          bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+  </body>
+</html>
