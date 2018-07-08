@@ -13,23 +13,27 @@ class AiHomeTianyanSpiderSpider(scrapy.Spider):
     name = 'ai_home_tianyan_spider'
     allowed_domains = ['tianyancha.com']
     base_url = 'https://chengdu.tianyancha.com/search/p{}?key=%E6%99%BA%E8%83%BD%E5%AE%B6%E5%B1%85'
-    start_urls = ['https://chengdu.tianyancha.com/search/p1?key=%E6%99%BA%E8%83%BD%E5%AE%B6%E5%B1%85']
+    start_urls = []
     base_product_url = 'https://www.tianyancha.com/pagination/product.xhtml?ps=&pn={}&id={}&_='
     trans = transCookie(settings['COOKIES'])
     cookies = trans.stringToDict()
     headers = {
         'Connection': 'keep - alive',  # 保持链接状态
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.104 Safari/537.36 Core/1.53.4549.400 QQBrowser/9.7.12900.400'
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.26 Safari/537.36 Core/1.63.5467.400 QQBrowser/10.1.1503.400Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.26 Safari/537.36 Core/1.63.5467.400 QQBrowser/10.1.1503.400'
     }
 
+    def start_requests(self):
+        url=self.base_url.format(1)
+        yield Request(url=url,cookies=self.cookies,headers=self.headers)
     def parse(self, response):
-        total_page = response.xpath('//div[@class="total "]')
+        total_page = response.xpath('//div[@class="total "]/text()')
         if total_page:
             total_page_num_str = total_page.extract()
             if total_page_num_str:
                 allTiticle = re.findall(r'[0-9]\d*', total_page_num_str[0])
                 if allTiticle:
-                    for iiii in range(0, int(allTiticle[0])):
+                    # for iiii in range(1, int(allTiticle[0])):
+                    for iiii in range(1, 11):
                         yield Request(url=self.base_url.format(iiii), callback=self.parse_get_url_per_page,
                                       cookies=self.cookies, headers=self.headers)
 
