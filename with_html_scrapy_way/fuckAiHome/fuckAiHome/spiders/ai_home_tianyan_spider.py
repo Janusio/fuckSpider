@@ -33,15 +33,15 @@ class AiHomeTianyanSpiderSpider(scrapy.Spider):
                 allTiticle = re.findall(r'[0-9]\d*', total_page_num_str[0])
                 if allTiticle:
                     # for iiii in range(1, int(allTiticle[0])):
-                    for iiii in range(1, 11):
+                    for iiii in range(1, 5):
                         yield Request(url=self.base_url.format(iiii), callback=self.parse_get_url_per_page,
                                       cookies=self.cookies, headers=self.headers)
 
     def parse_get_url_per_page(self, response):
-        per_company = response.xpath('div[@class="b-c-white search_result_container"]/div')
+        per_company = response.xpath('//div[@class="b-c-white search_result_container"]/div')
         if per_company:
             for iii in per_company:
-                company_url = iii.xpaty('/a[1]')
+                company_url = iii.xpath('/a[1]')
                 if company_url:
                     per_url = company_url.xpath('@href')
                     yield Request(url=per_url, callback=self.parse_per_company, cookies=self.cookies,
