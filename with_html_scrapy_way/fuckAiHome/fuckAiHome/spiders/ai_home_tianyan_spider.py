@@ -24,7 +24,7 @@ class AiHomeTianyanSpiderSpider(scrapy.Spider):
 
     # timeDict={'1':'4','2':'8',}
     def start_requests(self):
-        url = self.base_url.format(1)
+        url = self.base_url.format(0)
         yield Request(url=url, cookies=self.cookies, headers=self.headers)
 
     def parse(self, response):
@@ -51,6 +51,16 @@ class AiHomeTianyanSpiderSpider(scrapy.Spider):
 
     def parse_per_company(self, response):
         item = CompangItem()
+        item['c_address']=""
+        item['c_description']=""
+        item['c_email']=""
+        item['c_hangye']=""
+        item['c_leg_people']=""
+        item['c_name']=""
+        item['c_regis_address']=""
+        item['c_regis_money']=""
+        item['c_regis_time']=""
+        item['c_tel']=""
         item['c_id'] = response.url
         name_xpath = response.xpath('//input[@id="_companyName"]/@value').extract()
         if name_xpath:
@@ -120,11 +130,11 @@ class AiHomeTianyanSpiderSpider(scrapy.Spider):
         prod_list = []
         if id_xpath and total_page != 0:
             prod_url = self.base_product_url.format(total_page, 1, id_xpath[0])
-            html_r = requests.get(prod_url)
+            html_r = requests.get(prod_url,cookies=self.cookies,headers=self.headers)
             html = html_r.content.decode('utf-8')
             dom_tree = etree.HTML(html)
             for iii in dom_tree.xpath('/html/body/table/tbody/tr/td[3]/span/text()'):
-                prod_list.append(iii.extract())
+                prod_list.append(iii)
             # for iiiii in  range(1,total_page+1):
             #     prod_url=self.base_product_url.format(iiiii,id_xpath[0])
             #     html_r=requests.get(prod_url)
