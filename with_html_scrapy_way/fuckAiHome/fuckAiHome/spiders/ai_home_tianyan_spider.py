@@ -61,6 +61,7 @@ class AiHomeTianyanSpiderSpider(scrapy.Spider):
         item['c_regis_money']=""
         item['c_regis_time']=""
         item['c_tel']=""
+        item['c_jingyingfanwei']=""
         item['c_id'] = response.url
         name_xpath = response.xpath('//input[@id="_companyName"]/@value').extract()
         if name_xpath:
@@ -112,9 +113,11 @@ class AiHomeTianyanSpiderSpider(scrapy.Spider):
                 item['c_hangye'] = c_hangye.extract()[0]
             c_jingyingfanwei = c_gongsi_baseInfo.xpath('table[2]/tbody/tr[9]/td[2]/span/span/span[1]/text()')
             if c_jingyingfanwei:
-                c_jingyingfanwei = c_gongsi_baseInfo.xpath('table[2]/tbody/tr[9]/td[2]/span/span/span[2]/text()')
-            if c_jingyingfanwei:
-                item['c_jingyingfanwei'] = c_jingyingfanwei
+                item['c_jingyingfanwei'] = c_jingyingfanwei.extract()[0]
+            else:
+                c_jingyingfanwei_str=c_gongsi_baseInfo.xpath('table[2]/tbody/tr[9]/td[2]/span/span/span[2]/text()')
+                if c_jingyingfanwei_str:
+                    item['c_jingyingfanwei'] = c_jingyingfanwei_str
 
         product_page_total_str = c_gongsi_baseInfo.xpath('//div[@id="nav-main-productinfo"]')
         total_page = 0

@@ -48,15 +48,15 @@ class FuckaihomeDbPipeline(object):
                             time_str_str+=item['c_regis_time'][ii]
                     # print(time_str_str)
                 self.cursor.execute(
-                    """INSERT INTO aihome(c_address, c_description,c_email,c_hangye,c_id,c_leg_people,c_name,c_product,c_regis_address,c_regis_money,c_regis_time,c_tel)
-                    VALUE (%s, %s,%s,%s,%s, %s,%s,%s,%s, %s,%s,%s)""",
+                    """INSERT INTO aihome(c_address, c_description,c_email,c_hangye,c_id,c_leg_people,c_name,c_product,c_regis_address,c_regis_money,c_regis_time,c_tel,c_jingyingfanwei)
+                    VALUE (%s, %s,%s,%s,%s, %s,%s,%s,%s, %s,%s,%s,%s)""",
                     (item['c_address'],
                      item['c_description'],
                      item['c_email'], item['c_hangye'],
                      item['c_id'], item['c_leg_people'],
                      item['c_name'], str(item['c_product']),
                      item['c_regis_address'], item['c_regis_money'],
-                     time_str_str, item['c_tel']
+                     time_str_str, item['c_tel'],item['c_jingyingfanwei']
                      ))
                 self.connect.commit()
                 # 4609318275
