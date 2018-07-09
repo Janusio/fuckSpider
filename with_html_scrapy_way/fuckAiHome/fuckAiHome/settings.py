@@ -14,81 +14,84 @@ USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, li
 SPIDER_MODULES = ['fuckAiHome.spiders']
 NEWSPIDER_MODULE = 'fuckAiHome.spiders'
 
-
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'fuckAiHome (+http://www.yourdomain.com)'
+# USER_AGENT = 'fuckAiHome (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-#CONCURRENT_REQUESTS = 32
+# CONCURRENT_REQUESTS = 32
 
 # Configure a delay for requests for the same website (default: 0)
 # See http://scrapy.readthedocs.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
 DOWNLOAD_DELAY = 8
 # The download delay setting will honor only one of:
-#CONCURRENT_REQUESTS_PER_DOMAIN = 16
-#CONCURRENT_REQUESTS_PER_IP = 16
+# CONCURRENT_REQUESTS_PER_DOMAIN = 16
+# CONCURRENT_REQUESTS_PER_IP = 16
 
 # Disable cookies (enabled by default)
-#COOKIES_ENABLED = False
+# COOKIES_ENABLED = False
 
 # Disable Telnet Console (enabled by default)
-#TELNETCONSOLE_ENABLED = False
+# TELNETCONSOLE_ENABLED = False
 
 # Override the default request headers:
-#DEFAULT_REQUEST_HEADERS = {
+# DEFAULT_REQUEST_HEADERS = {
 #   'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
 #   'Accept-Language': 'en',
-#}
+# }
 
 # Enable or disable spider middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
-#SPIDER_MIDDLEWARES = {
+# SPIDER_MIDDLEWARES = {
 #    'fuckAiHome.middlewares.FuckaihomeSpiderMiddleware': 543,
-#}
+# }
 
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
+# DOWNLOADER_MIDDLEWARES = {
 #    'fuckAiHome.middlewares.MyCustomDownloaderMiddleware': 543,
-#}
+# }
 EXTENSIONS = {
-   'scrapy.extensions.memusage.MemoryUsage': None,
+    'scrapy.extensions.memusage.MemoryUsage': None,
 }
 # Enable or disable extensions
 # See http://scrapy.readthedocs.org/en/latest/topics/extensions.html
-#EXTENSIONS = {
+# EXTENSIONS = {
 #    'scrapy.extensions.telnet.TelnetConsole': None,
-#}
+# }
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
+# ITEM_PIPELINES = {
 #    'fuckAiHome.pipelines.FuckaihomePipeline': 300,
-#}
+# }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
-#AUTOTHROTTLE_ENABLED = True
+# AUTOTHROTTLE_ENABLED = True
 # The initial download delay
-#AUTOTHROTTLE_START_DELAY = 5
+# AUTOTHROTTLE_START_DELAY = 5
 # The maximum download delay to be set in case of high latencies
-#AUTOTHROTTLE_MAX_DELAY = 60
+# AUTOTHROTTLE_MAX_DELAY = 60
 # The average number of requests Scrapy should be sending in parallel to
 # each remote server
-#AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0
+# AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0
 # Enable showing throttling stats for every response received:
-#AUTOTHROTTLE_DEBUG = False
+# AUTOTHROTTLE_DEBUG = False
 
 # Enable and configure HTTP caching (disabled by default)
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings
-#HTTPCACHE_ENABLED = True
-#HTTPCACHE_EXPIRATION_SECS = 0
-#HTTPCACHE_DIR = 'httpcache'
-#HTTPCACHE_IGNORE_HTTP_CODES = []
-#HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
-COOKIESEEEE="TYCID=80ea5440814411e88171490ca18f11d1; undefined=80ea5440814411e88171490ca18f11d1; ssuid=5236386956; RTYCID=ba66ddf781c74ba8a4b72dc35daba93e; aliyungf_tc=AQAAABW/yH3FfAkA9rdydiMhtzXhq505; csrfToken=QJ7sUSKYY7iX55aNE0CSEOgC; Hm_lvt_e92c8d65d92d534b0fc290df538b4758=1530899192,1530943077; tyc-user-info=%257B%2522new%2522%253A%25221%2522%252C%2522token%2522%253A%2522eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxODQ4MjIxMjgyMCIsImlhdCI6MTUzMTAwMTExOSwiZXhwIjoxNTQ2NTUzMTE5fQ.UKJUGK_7bF6B_lHsyBABxq_SwJv5XEh5u1PtssY4EqYGwuXcZMH9fxJW_eo_oTNdFMbTqs2wLu0aMjCH9bvmXQ%2522%252C%2522integrity%2522%253A%25220%2525%2522%252C%2522state%2522%253A%25220%2522%252C%2522redPoint%2522%253A%25220%2522%252C%2522vipManager%2522%253A%25220%2522%252C%2522vnum%2522%253A%25220%2522%252C%2522onum%2522%253A%25220%2522%252C%2522mobile%2522%253A%252218482212820%2522%257D; auth_token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxODQ4MjIxMjgyMCIsImlhdCI6MTUzMTAwMTExOSwiZXhwIjoxNTQ2NTUzMTE5fQ.UKJUGK_7bF6B_lHsyBABxq_SwJv5XEh5u1PtssY4EqYGwuXcZMH9fxJW_eo_oTNdFMbTqs2wLu0aMjCH9bvmXQ; Hm_lpvt_e92c8d65d92d534b0fc290df538b4758=1531001133"
-COOKIES="aliyungf_tc=AQAAAMNiOHA7fQkAGrZydnMLWR2EVbe7; csrfToken=rkWxQKFdQnvNFcUP6lV7gRT2; TYCID=f52a477082cf11e889a8e5f8bd112cda; undefined=f52a477082cf11e889a8e5f8bd112cda; Hm_lvt_e92c8d65d92d534b0fc290df538b4758=1531069036; ssuid=6618825072; token=40a412e946d14d5fb620ae91a75801c0; _utm=577f4a64653b4065b8035cd53b561760; tyc-user-info=%257B%2522token%2522%253A%2522eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxODQ4MjIxMjgyMCIsImlhdCI6MTUzMTA2OTEwNywiZXhwIjoxNTQ2NjIxMTA3fQ.d8jIzxf_ULwO4W8hGcBkEDeTWAM5SUFfJ2ffBIxlTxqGKMtIsglwjYfwMProiMcuuc8hlZlvnqBn_SSIBxfwrw%2522%252C%2522integrity%2522%253A%25220%2525%2522%252C%2522state%2522%253A%25220%2522%252C%2522redPoint%2522%253A%25220%2522%252C%2522vipManager%2522%253A%25220%2522%252C%2522vnum%2522%253A%25220%2522%252C%2522onum%2522%253A%25220%2522%252C%2522mobile%2522%253A%252218482212820%2522%257D; auth_token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxODQ4MjIxMjgyMCIsImlhdCI6MTUzMTA2OTEwNywiZXhwIjoxNTQ2NjIxMTA3fQ.d8jIzxf_ULwO4W8hGcBkEDeTWAM5SUFfJ2ffBIxlTxqGKMtIsglwjYfwMProiMcuuc8hlZlvnqBn_SSIBxfwrw; Hm_lpvt_e92c8d65d92d534b0fc290df538b4758=1531069131"
+# HTTPCACHE_ENABLED = True
+# HTTPCACHE_EXPIRATION_SECS = 0
+# HTTPCACHE_DIR = 'httpcache'
+# HTTPCACHE_IGNORE_HTTP_CODES = []
+# HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+COOKIESEEEE = "TYCID=80ea5440814411e88171490ca18f11d1; undefined=80ea5440814411e88171490ca18f11d1; ssuid=5236386956; RTYCID=ba66ddf781c74ba8a4b72dc35daba93e; aliyungf_tc=AQAAABW/yH3FfAkA9rdydiMhtzXhq505; csrfToken=QJ7sUSKYY7iX55aNE0CSEOgC; Hm_lvt_e92c8d65d92d534b0fc290df538b4758=1530899192,1530943077; tyc-user-info=%257B%2522new%2522%253A%25221%2522%252C%2522token%2522%253A%2522eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxODQ4MjIxMjgyMCIsImlhdCI6MTUzMTAwMTExOSwiZXhwIjoxNTQ2NTUzMTE5fQ.UKJUGK_7bF6B_lHsyBABxq_SwJv5XEh5u1PtssY4EqYGwuXcZMH9fxJW_eo_oTNdFMbTqs2wLu0aMjCH9bvmXQ%2522%252C%2522integrity%2522%253A%25220%2525%2522%252C%2522state%2522%253A%25220%2522%252C%2522redPoint%2522%253A%25220%2522%252C%2522vipManager%2522%253A%25220%2522%252C%2522vnum%2522%253A%25220%2522%252C%2522onum%2522%253A%25220%2522%252C%2522mobile%2522%253A%252218482212820%2522%257D; auth_token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxODQ4MjIxMjgyMCIsImlhdCI6MTUzMTAwMTExOSwiZXhwIjoxNTQ2NTUzMTE5fQ.UKJUGK_7bF6B_lHsyBABxq_SwJv5XEh5u1PtssY4EqYGwuXcZMH9fxJW_eo_oTNdFMbTqs2wLu0aMjCH9bvmXQ; Hm_lpvt_e92c8d65d92d534b0fc290df538b4758=1531001133"
+COOKIES = "aliyungf_tc=AQAAAAdRKR0azA4AZD+WtlIxIQ4RclUc; csrfToken=HV119cZfia4bjLaY4l5RdB-8; TYCID=848ab450833811e887f2cf6e044ddc15; undefined=848ab450833811e887f2cf6e044ddc15; Hm_lvt_e92c8d65d92d534b0fc290df538b4758=1531113944; ssuid=3150529488; token=beeea4b5c3634edb86495ec192de2bd4; _utm=2975074fe13a45fba6ede5ae6a4d1370; tyc-user-info=%257B%2522token%2522%253A%2522eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxODQ4MjIxMjgyMCIsImlhdCI6MTUzMTExMzk5OSwiZXhwIjoxNTQ2NjY1OTk5fQ.BRrHVB3gcEANFEePZUCXi8XaA7WbK38EFE0XsUsHkufzDR5sBnWjmOkq1LlTPpgRs29CYSkFm851EH-ekpbLIg%2522%252C%2522integrity%2522%253A%25220%2525%2522%252C%2522state%2522%253A%25220%2522%252C%2522redPoint%2522%253A%25220%2522%252C%2522vipManager%2522%253A%25220%2522%252C%2522vnum%2522%253A%25220%2522%252C%2522onum%2522%253A%25220%2522%252C%2522mobile%2522%253A%252218482212820%2522%257D; auth_token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxODQ4MjIxMjgyMCIsImlhdCI6MTUzMTExMzk5OSwiZXhwIjoxNTQ2NjY1OTk5fQ.BRrHVB3gcEANFEePZUCXi8XaA7WbK38EFE0XsUsHkufzDR5sBnWjmOkq1LlTPpgRs29CYSkFm851EH-ekpbLIg; Hm_lpvt_e92c8d65d92d534b0fc290df538b4758=1531114102"
+MYSQL_HOST = 'localhost'
+MYSQL_DBNAME = 'codingatwill'
+MYSQL_USER = 'root'
+MYSQL_PASSWD = '1314'
