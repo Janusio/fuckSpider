@@ -2,4 +2,5 @@
 # Author: Neng Qi
 from scrapy import cmdline
 
-cmdline.execute('scrapy crawl ai_home_tianyan_spider'.split())
+# cmdline.execute('scrapy crawl ai_home_tianyan_spider'.split())
+cmdline.execute('scrapy crawl ai_home_qixinbao_spider'.split())

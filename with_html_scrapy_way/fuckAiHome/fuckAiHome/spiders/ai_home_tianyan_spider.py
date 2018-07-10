@@ -35,7 +35,7 @@ class AiHomeTianyanSpiderSpider(scrapy.Spider):
                 allTiticle = re.findall(r'[0-9]\d*', total_page_num_str[0])
                 if allTiticle:
                     # for iiii in range(1, int(allTiticle[0])):
-                    for iiii in range(1, 5):
+                    for iiii in range(5, 6):
                         yield Request(url=self.base_url.format(iiii), callback=self.parse_get_url_per_page,
                                       cookies=self.cookies, headers=self.headers)
 
