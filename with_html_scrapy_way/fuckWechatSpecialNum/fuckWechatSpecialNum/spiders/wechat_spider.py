@@ -26,3 +26,4 @@ class WechatSpiderSpider(scrapy.Spider):
             url=url_xpath.extract()[0]
             item['url']=url
             yield item
+
