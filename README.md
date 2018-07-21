@@ -1,0 +1,2 @@
+# fuckSpider
+CrawlerFuckDenfender
