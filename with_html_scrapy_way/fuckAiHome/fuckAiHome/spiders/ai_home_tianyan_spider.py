@@ -51,17 +51,17 @@ class AiHomeTianyanSpiderSpider(scrapy.Spider):
 
     def parse_per_company(self, response):
         item = CompangItem()
-        item['c_address']=""
-        item['c_description']=""
-        item['c_email']=""
-        item['c_hangye']=""
-        item['c_leg_people']=""
-        item['c_name']=""
-        item['c_regis_address']=""
-        item['c_regis_money']=""
-        item['c_regis_time']=""
-        item['c_tel']=""
-        item['c_jingyingfanwei']=""
+        item['c_address'] = ""
+        item['c_description'] = ""
+        item['c_email'] = ""
+        item['c_hangye'] = ""
+        item['c_leg_people'] = ""
+        item['c_name'] = ""
+        item['c_regis_address'] = ""
+        item['c_regis_money'] = ""
+        item['c_regis_time'] = ""
+        item['c_tel'] = ""
+        item['c_jingyingfanwei'] = ""
         item['c_id'] = response.url
         name_xpath = response.xpath('//input[@id="_companyName"]/@value').extract()
         if name_xpath:
@@ -115,7 +115,7 @@ class AiHomeTianyanSpiderSpider(scrapy.Spider):
             if c_jingyingfanwei:
                 item['c_jingyingfanwei'] = c_jingyingfanwei.extract()[0]
             else:
-                c_jingyingfanwei_str=c_gongsi_baseInfo.xpath('table[2]/tbody/tr[9]/td[2]/span/span/span[2]/text()')
+                c_jingyingfanwei_str = c_gongsi_baseInfo.xpath('table[2]/tbody/tr[9]/td[2]/span/span/span[2]/text()')
                 if c_jingyingfanwei_str:
                     item['c_jingyingfanwei'] = c_jingyingfanwei_str
 
@@ -133,7 +133,7 @@ class AiHomeTianyanSpiderSpider(scrapy.Spider):
         prod_list = []
         if id_xpath and total_page != 0:
             prod_url = self.base_product_url.format(total_page, 1, id_xpath[0])
-            html_r = requests.get(prod_url,cookies=self.cookies,headers=self.headers)
+            html_r = requests.get(prod_url, cookies=self.cookies, headers=self.headers)
             html = html_r.content.decode('utf-8')
             dom_tree = etree.HTML(html)
             for iii in dom_tree.xpath('/html/body/table/tbody/tr/td[3]/span/text()'):
@@ -144,8 +144,8 @@ class AiHomeTianyanSpiderSpider(scrapy.Spider):
             #     html = html_r.content.decode('utf-8')
             #     dom_tree = etree.HTML(html)
             #     prod_list.append(dom_tree.xpath('//body/div/div/table/tbody/tr/td[3]/span/text()').extract())
-        if len(prod_list)==0:
-            item['c_product'] =["No Product"]
+        if len(prod_list) == 0:
+            item['c_product'] = ["No Product"]
         else:
             item['c_product'] = prod_list
         yield item
